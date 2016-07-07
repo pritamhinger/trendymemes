@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class MemesCollectionViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
