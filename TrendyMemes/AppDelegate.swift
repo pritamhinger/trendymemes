@@ -13,9 +13,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
+    var memeEditorSetting: MemeEditorSetting = MemeEditorSetting()
+    var memes = [Meme]()
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        initializeMemeEditorSettings()
+        memes.append(Meme(titleAtTop: "",titleAtBottom: "",imageToBeMemed: UIImage(),memedImage: UIImage()))
+        memes.append(Meme(titleAtTop: "",titleAtBottom: "",imageToBeMemed: UIImage(),memedImage: UIImage()))
+        memes.append(Meme(titleAtTop: "",titleAtBottom: "",imageToBeMemed: UIImage(),memedImage: UIImage()))
         return true
     }
 
@@ -41,6 +46,55 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-
+    // MARK: - Private Methods
+    func initializeMemeEditorSettings(){
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        var fontName = ""
+        var fontSize = 40
+        var strokeColor = UIColor.blackColor()
+        var foregroundColor = UIColor.whiteColor()
+        
+        if let name = userDefaults.valueForKey(StringConstants.DictionaryKeys.FontName){
+            fontName = name as! String
+        }
+        else{
+            fontName = "MarkerFelt-Wide"
+        }
+        
+        if let size = userDefaults.valueForKey(StringConstants.DictionaryKeys.FontSize){
+            fontSize = size as! Int
+        }
+        else{
+            fontSize = 40
+        }
+        
+//        if let stroke = userDefaults.valueForKey(StringConstants.DictionaryKeys.StrokeColor){
+//            strokeColor = stroke as! UIColor
+//        }
+//        else{
+//            strokeColor = UIColor.blackColor()
+//        }
+//        
+//        if let foreground = userDefaults.valueForKey(StringConstants.DictionaryKeys.ForegroundColor){
+//            foregroundColor = foreground as! UIColor
+//        }
+//        else{
+//            foregroundColor = UIColor.whiteColor()
+//        }
+        
+        
+        userDefaults.setObject(fontName, forKey: StringConstants.DictionaryKeys.FontName)
+        userDefaults.setInteger(fontSize, forKey: StringConstants.DictionaryKeys.FontSize)
+//        userDefaults.setObject(strokeColor, forKey: StringConstants.DictionaryKeys.StrokeColor)
+//        userDefaults.setObject(foregroundColor, forKey: StringConstants.DictionaryKeys.ForegroundColor)
+        
+        if let templateSetting = userDefaults.valueForKey("Template"){
+            memeEditorSetting.templateSetting = TemplateSetting(rawValue: templateSetting as! Int)!
+        }
+        else{
+            memeEditorSetting.templateSetting = TemplateSetting.TopBottom
+            userDefaults.setInteger(memeEditorSetting.templateSetting.rawValue, forKey: "Template")
+        }
+    }
 }
 

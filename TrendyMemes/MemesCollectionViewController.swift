@@ -8,18 +8,30 @@
 
 import UIKit
 
-class MemesCollectionViewController: UIViewController {
+class MemesCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
+    @IBOutlet var collectionView: UICollectionView!
+    
+    private var memes = [Meme]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        memes = (UIApplication.sharedApplication().delegate as! AppDelegate).memes
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return memes.count
     }
-
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        
+        let cell = self.collectionView.dequeueReusableCellWithReuseIdentifier("memeImageCellIdentifier" , forIndexPath: indexPath) as! MemeThumbnailCollectionViewCell
+        let image = UIImage(named: "placeholder")
+        
+        cell.imagePlaceHolder.image = image
+        
+        return cell
+    }
 
 }
 
