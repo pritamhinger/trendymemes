@@ -21,6 +21,7 @@
 		485DA9441D3009E800AB9DDE /* MemeEditorSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485DA9431D3009E800AB9DDE /* MemeEditorSetting.swift */; };
 		485DA9461D300A0400AB9DDE /* FontSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485DA9451D300A0400AB9DDE /* FontSetting.swift */; };
 		485DA9481D300A1500AB9DDE /* TemplateSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485DA9471D300A1500AB9DDE /* TemplateSetting.swift */; };
+		48CEF8301D30CAC400832A58 /* TemplateTypesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CEF82F1D30CAC400832A58 /* TemplateTypesTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		485DA9431D3009E800AB9DDE /* MemeEditorSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemeEditorSetting.swift; sourceTree = "<group>"; };
 		485DA9451D300A0400AB9DDE /* FontSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontSetting.swift; sourceTree = "<group>"; };
 		485DA9471D300A1500AB9DDE /* TemplateSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemplateSetting.swift; sourceTree = "<group>"; };
+		48CEF82F1D30CAC400832A58 /* TemplateTypesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemplateTypesTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +149,7 @@
 			children = (
 				48035B671D2EC710007A56FC /* MemesCollectionViewController.swift */,
 				485DA9401D2F7DDD00AB9DDE /* MemeEditorViewController.swift */,
+				48CEF82F1D30CAC400832A58 /* TemplateTypesTableViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -328,6 +331,7 @@
 				485DA93A1D2ECACE00AB9DDE /* Meme.swift in Sources */,
 				485DA9461D300A0400AB9DDE /* FontSetting.swift in Sources */,
 				485DA9441D3009E800AB9DDE /* MemeEditorSetting.swift in Sources */,
+				48CEF8301D30CAC400832A58 /* TemplateTypesTableViewController.swift in Sources */,
 				48035B681D2EC710007A56FC /* MemesCollectionViewController.swift in Sources */,
 				48035B661D2EC710007A56FC /* AppDelegate.swift in Sources */,
 				485DA93F1D2F6EAF00AB9DDE /* StringConstants.swift in Sources */,

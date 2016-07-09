@@ -11,6 +11,11 @@ import Foundation
 struct StringConstants {
     struct CellIdentifiers {
         static let MemeImageCellIdentifier = "memeImageCellIdentifier"
+        static let TemplateTypeCellIdentifier = "templateTypeCellIdentifier"
+    }
+    
+    struct Segues {
+        static let ShowTemplatesSegue = "showTemplatesSegue"
     }
     
     struct DictionaryKeys {

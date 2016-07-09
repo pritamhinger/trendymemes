@@ -9,5 +9,5 @@
 import Foundation
 
 enum TemplateSetting: Int {
-    case TopLeft = 1, TopBottom = 2, TopRight = 3, LeftBottom = 4, LeftRight = 5, BottomRight = 6
+    case TopLeft = 0, TopBottom = 1, TopRight = 2, LeftBottom = 3, LeftRight = 4, BottomRight = 5
 }

@@ -51,8 +51,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let userDefaults = NSUserDefaults.standardUserDefaults()
         var fontName = ""
         var fontSize = 40
-        var strokeColor = UIColor.blackColor()
-        var foregroundColor = UIColor.whiteColor()
         
         if let name = userDefaults.valueForKey(StringConstants.DictionaryKeys.FontName){
             fontName = name as! String
@@ -68,25 +66,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             fontSize = 40
         }
         
-//        if let stroke = userDefaults.valueForKey(StringConstants.DictionaryKeys.StrokeColor){
-//            strokeColor = stroke as! UIColor
-//        }
-//        else{
-//            strokeColor = UIColor.blackColor()
-//        }
-//        
-//        if let foreground = userDefaults.valueForKey(StringConstants.DictionaryKeys.ForegroundColor){
-//            foregroundColor = foreground as! UIColor
-//        }
-//        else{
-//            foregroundColor = UIColor.whiteColor()
-//        }
-        
-        
         userDefaults.setObject(fontName, forKey: StringConstants.DictionaryKeys.FontName)
         userDefaults.setInteger(fontSize, forKey: StringConstants.DictionaryKeys.FontSize)
-//        userDefaults.setObject(strokeColor, forKey: StringConstants.DictionaryKeys.StrokeColor)
-//        userDefaults.setObject(foregroundColor, forKey: StringConstants.DictionaryKeys.ForegroundColor)
         
         if let templateSetting = userDefaults.valueForKey("Template"){
             memeEditorSetting.templateSetting = TemplateSetting(rawValue: templateSetting as! Int)!

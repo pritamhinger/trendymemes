@@ -9,18 +9,6 @@
 import Foundation
 
 class MemeEditorSetting {
-    var fontSetting:FontSetting = FontSetting(){
-        willSet(newValue){
-            // TODO: Save new font setting to User Default
-            print("Changing Font Setting")
-        }
-    }
-    
-    var templateSetting:TemplateSetting = TemplateSetting.TopBottom{
-        willSet(newValue){
-            // TODO: Save new template setting to User Default
-            print("Changing Template Setting")
-        }
-    }
-    
+    var fontSetting:FontSetting = FontSetting()
+    var templateSetting:TemplateSetting = TemplateSetting.TopBottom
 }
