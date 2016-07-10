@@ -42,6 +42,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         self.textAtBottom.textAlignment = .Center
         self.textAtBottom.text = StringConstants.Default.TextAtBottom
         self.textAtBottom.backgroundColor = UIColor.clearColor()
+        self.navigationItem.title = "Meme Editor"
         prepareView()
         
         self.subscribeForFontNotification()

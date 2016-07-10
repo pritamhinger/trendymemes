@@ -20,6 +20,8 @@ class TemplateTypesTableViewController: UITableViewController {
             currentTemplate = TemplateSetting(rawValue: templateSetting as! Int)!
         }
         
+        self.navigationItem.title = "Select a Template"
+        
     }
     
     // MARK: - Table view data source

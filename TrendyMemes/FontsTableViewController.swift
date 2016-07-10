@@ -29,6 +29,8 @@ class FontsTableViewController: UITableViewController {
         else{
             curSelectedFont = StringConstants.Default.FontName
         }
+        
+        self.navigationItem.title = "Select a Font"
     }
 
     // MARK: - Table view data source
