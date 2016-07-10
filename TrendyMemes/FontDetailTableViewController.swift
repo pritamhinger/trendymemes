@@ -1,5 +1,5 @@
 //
-//  FontsTableViewController.swift
+//  FontDetailTableViewController.swift
 //  TrendyMemes
 //
 //  Created by Pritam Hinger on 10/07/16.
@@ -8,16 +8,13 @@
 
 import UIKit
 
-class FontsTableViewController: UITableViewController {
+class FontDetailTableViewController: UITableViewController {
     
-    var fonts = [String: [String]]()
-    var familyNames = [String]()
+    var fonts = [String]()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        fonts = FontsManager.sharedInstance.fonts
-        familyNames = Array(fonts.keys)
     }
 
     // MARK: - Table view data source
@@ -32,9 +29,9 @@ class FontsTableViewController: UITableViewController {
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(StringConstants.CellIdentifiers.FontFamilyNameCellIdentifier, forIndexPath: indexPath)
-        
-        cell.textLabel?.text = familyNames[indexPath.row]
+        let cell = tableView.dequeueReusableCellWithIdentifier(StringConstants.CellIdentifiers.FontNameCellIdentifier, forIndexPath: indexPath)
+
+        cell.textLabel?.text = fonts[indexPath.row]
 
         return cell
     }
@@ -75,18 +72,14 @@ class FontsTableViewController: UITableViewController {
     }
     */
 
-    
+    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == StringConstants.Segues.ShowFontsSegue{
-            let destinationController = segue.destinationViewController as! FontDetailTableViewController
-            let currentCell = sender as! UITableViewCell
-            let currentFontFamily = currentCell.textLabel?.text
-            destinationController.fonts = fonts[currentFontFamily!]!
-        }
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
     }
- 
+    */
 
 }
