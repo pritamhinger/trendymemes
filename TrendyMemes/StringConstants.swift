@@ -33,7 +33,7 @@ struct StringConstants {
     
     struct  Default {
         static let FontName = "MarkerFelt-Wide"
-        static let FontSize = 40
+        static let FontSize = 35
         static let StrokeColor = UIColor.blackColor()
         static let ForegroungColor = UIColor.whiteColor()
         static let TextAtTop = "TOP"

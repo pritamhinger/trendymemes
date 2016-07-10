@@ -10,16 +10,20 @@ import UIKit
 
 class MemesCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
+    // MARK: - IBOutlets
     @IBOutlet var collectionView: UICollectionView!
     
+    // MARK: - Private variables
     private var memes = [Meme]()
     
+    // MARK: - Life Cycle Events
     override func viewDidLoad() {
         super.viewDidLoad()
         memes = (UIApplication.sharedApplication().delegate as! AppDelegate).memes
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MemesCollectionViewController.reloadCollectionView(_:)), name: StringConstants.NotificationName.MemeCreatedNotification, object: nil)
     }
     
+    // MARK: - Collection view data source
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if memes.count == 0{
             showEmptyMessage("No memes created. Click '+' at top right and have fun")
@@ -45,6 +49,7 @@ class MemesCollectionViewController: UIViewController, UICollectionViewDelegate,
         return cell
     }
 
+    // MARK: - Private Methods
     func reloadCollectionView(notification: NSNotification) {
         memes = (UIApplication.sharedApplication().delegate as! AppDelegate).memes
         self.collectionView.reloadData()

@@ -24,9 +24,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     var keyboardShifted = false
     private var textFieldInAction:UITextField?
     
-    var centerOfTopText = CGPoint(x: 0, y: 0)
-    var centerOfBottomText = CGPoint(x: 0, y: 0);
-    
     // MARK: - VC Life Cycle Events
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,9 +43,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         self.textAtBottom.text = StringConstants.Default.TextAtBottom
         self.textAtBottom.backgroundColor = UIColor.clearColor()
         prepareView()
+        
         self.subscribeForFontNotification()
-        centerOfTopText = textAtTop.center
-        centerOfBottomText = textAtBottom.center
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -81,6 +77,23 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     @IBAction func saveMeme(sender: AnyObject) {
+        
+        if self.textAtBottom.text == "" || self.textAtTop.text == ""{
+            let alertView = UIAlertController(title: "Nanodegree Assignment", message: "Enter messages to add to image", preferredStyle: .Alert)
+            let defaultAction = UIAlertAction(title: "Ok", style: .Default, handler: nil);
+            alertView.addAction(defaultAction);
+            presentViewController(alertView, animated: true, completion: nil);
+            
+            if self.textAtTop.text == ""{
+                self.textAtTop.text = StringConstants.Default.TextAtTop
+            }
+            else{
+                self.textAtBottom.text = StringConstants.Default.TextAtBottom
+            }
+            
+            return
+        }
+        
         let activityController = UIActivityViewController(activityItems: [generateMemedImage()], applicationActivities: nil)
         activityController.excludedActivityTypes = [UIActivityTypeAirDrop,
                                                     UIActivityTypeAddToReadingList,
