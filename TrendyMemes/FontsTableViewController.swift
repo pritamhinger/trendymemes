@@ -53,6 +53,9 @@ class FontsTableViewController: UITableViewController {
             cell.accessoryType = .Checkmark
             tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: .Middle)
         }
+        else{
+            cell.accessoryType = .None
+        }
         
         return cell
     }
@@ -69,7 +72,8 @@ class FontsTableViewController: UITableViewController {
         let cell = tableView.cellForRowAtIndexPath(indexPath)
         cell?.selected = true
         cell?.accessoryType = .Checkmark
-        changeFontName((cell?.textLabel?.text)!)
+        curSelectedFont = (cell?.textLabel?.text)!
+        changeFontName(curSelectedFont)
     }
     
     override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {

@@ -36,6 +36,7 @@ struct StringConstants {
         static let FontSize = 40
         static let StrokeColor = UIColor.blackColor()
         static let ForegroungColor = UIColor.whiteColor()
+        static let TextAtTop = "TOP"
+        static let TextAtBottom = "BOTTOM"
     }
-    
 }

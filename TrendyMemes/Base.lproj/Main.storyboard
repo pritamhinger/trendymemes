@@ -128,19 +128,35 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xL3-3C-KyB">
                                 <rect key="frame" x="20" y="108" width="560" height="448"/>
                             </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="top" textAlignment="center" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="4jo-c3-Nnz">
+                                <rect key="frame" x="20" y="116" width="560" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="bottom" textAlignment="center" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="Ymo-0K-9iv">
+                                <rect key="frame" x="20" y="518" width="560" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="pSz-qD-yTd" firstAttribute="leading" secondItem="0dJ-FF-qoX" secondAttribute="leadingMargin" constant="-20" id="Bxh-i2-v8G"/>
                             <constraint firstItem="ilK-Ha-Q44" firstAttribute="top" secondItem="gSG-nL-tOt" secondAttribute="bottom" id="FIk-oH-zIZ"/>
                             <constraint firstItem="xL3-3C-KyB" firstAttribute="leading" secondItem="0dJ-FF-qoX" secondAttribute="leadingMargin" id="H3D-Zk-7jQ"/>
+                            <constraint firstItem="Ymo-0K-9iv" firstAttribute="leading" secondItem="xL3-3C-KyB" secondAttribute="leading" id="Pg7-HF-muK"/>
                             <constraint firstAttribute="trailingMargin" secondItem="xL3-3C-KyB" secondAttribute="trailing" id="R8W-GA-Al1"/>
                             <constraint firstItem="ilK-Ha-Q44" firstAttribute="leading" secondItem="0dJ-FF-qoX" secondAttribute="leadingMargin" constant="-20" id="Zv4-yU-kgo"/>
                             <constraint firstItem="UOi-M5-vg5" firstAttribute="top" secondItem="pSz-qD-yTd" secondAttribute="bottom" id="aSF-UN-GnE"/>
                             <constraint firstItem="xL3-3C-KyB" firstAttribute="top" secondItem="ilK-Ha-Q44" secondAttribute="bottom" id="bk9-q7-Sk5"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ilK-Ha-Q44" secondAttribute="trailing" constant="-20" id="cP3-Z6-jIX"/>
+                            <constraint firstItem="Ymo-0K-9iv" firstAttribute="bottom" secondItem="xL3-3C-KyB" secondAttribute="bottom" constant="-8" id="dpu-2M-PdB"/>
                             <constraint firstItem="pSz-qD-yTd" firstAttribute="top" secondItem="xL3-3C-KyB" secondAttribute="bottom" id="gJD-BN-jLk"/>
                             <constraint firstAttribute="trailingMargin" secondItem="pSz-qD-yTd" secondAttribute="trailing" constant="-20" id="gc7-kk-315"/>
+                            <constraint firstItem="4jo-c3-Nnz" firstAttribute="trailing" secondItem="xL3-3C-KyB" secondAttribute="trailing" id="glm-YH-4g1"/>
+                            <constraint firstItem="xL3-3C-KyB" firstAttribute="top" secondItem="4jo-c3-Nnz" secondAttribute="top" constant="-8" id="vfC-0f-dl2"/>
+                            <constraint firstItem="4jo-c3-Nnz" firstAttribute="leading" secondItem="xL3-3C-KyB" secondAttribute="leading" id="x83-Md-1xK"/>
+                            <constraint firstItem="Ymo-0K-9iv" firstAttribute="trailing" secondItem="xL3-3C-KyB" secondAttribute="trailing" id="xfg-3S-PO2"/>
                         </constraints>
                     </view>
                     <connections>
@@ -148,6 +164,8 @@
                         <outlet property="editorToolBar" destination="ilK-Ha-Q44" id="mTX-Jg-3dX"/>
                         <outlet property="pickerToolBar" destination="pSz-qD-yTd" id="UOo-HP-zTe"/>
                         <outlet property="selectedImage" destination="xL3-3C-KyB" id="pbm-sB-Jot"/>
+                        <outlet property="textAtBottom" destination="Ymo-0K-9iv" id="hm0-yc-SAE"/>
+                        <outlet property="textAtTop" destination="4jo-c3-Nnz" id="Ffj-d9-aKG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="low-le-BBH" userLabel="First Responder" sceneMemberID="firstResponder"/>
