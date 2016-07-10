@@ -39,4 +39,9 @@ struct StringConstants {
         static let TextAtTop = "TOP"
         static let TextAtBottom = "BOTTOM"
     }
+    
+    struct  NotificationName {
+        static let FontDidChangeNotification = "FontChange"
+        static let MemeCreatedNotification = "MemeCreatedNotification"
+    }
 }

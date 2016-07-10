@@ -18,9 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         initializeMemeEditorSettings()
-        memes.append(Meme(titleAtTop: "",titleAtBottom: "",imageToBeMemed: UIImage(),memedImage: UIImage()))
-        memes.append(Meme(titleAtTop: "",titleAtBottom: "",imageToBeMemed: UIImage(),memedImage: UIImage()))
-        memes.append(Meme(titleAtTop: "",titleAtBottom: "",imageToBeMemed: UIImage(),memedImage: UIImage()))
+//        memes.append(Meme(titleAtTop: "",titleAtBottom: "",imageToBeMemed: UIImage(),memedImage: UIImage()))
+//        memes.append(Meme(titleAtTop: "",titleAtBottom: "",imageToBeMemed: UIImage(),memedImage: UIImage()))
+//        memes.append(Meme(titleAtTop: "",titleAtBottom: "",imageToBeMemed: UIImage(),memedImage: UIImage()))
         return true
     }
 

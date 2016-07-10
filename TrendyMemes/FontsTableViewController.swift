@@ -74,6 +74,8 @@ class FontsTableViewController: UITableViewController {
         cell?.accessoryType = .Checkmark
         curSelectedFont = (cell?.textLabel?.text)!
         changeFontName(curSelectedFont)
+        
+        NSNotificationCenter.defaultCenter().postNotificationName(StringConstants.NotificationName.FontDidChangeNotification, object: nil, userInfo: [StringConstants.DictionaryKeys.FontName:curSelectedFont])
     }
     
     override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {

@@ -17,15 +17,20 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet weak var camera: UIBarButtonItem!
     @IBOutlet weak var textAtTop: UITextField!
     @IBOutlet weak var textAtBottom: UITextField!
+    @IBOutlet weak var saveButton: UIBarButtonItem!
     
     // MARK: - Private properties
-    let memeTextAttributes = [NSStrokeColorAttributeName : UIColor.blackColor(), NSForegroundColorAttributeName : UIColor.whiteColor(), NSFontAttributeName : UIFont(name: "MarkerFelt-Wide", size: 40)!, NSStrokeWidthAttributeName : -3.0]
+    var memeTextAttributes = [String: AnyObject]()
     var keyboardShifted = false
     private var textFieldInAction:UITextField?
     
     // MARK: - VC Life Cycle Events
     override func viewDidLoad() {
         super.viewDidLoad()
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        let font = userDefaults.valueForKey(StringConstants.DictionaryKeys.FontName) as! String
+        memeTextAttributes = getTextFieldParameter(font)
+        
         self.textAtTop.delegate = self
         self.textAtTop.text = StringConstants.Default.TextAtTop
         self.textAtTop.defaultTextAttributes = memeTextAttributes
@@ -37,7 +42,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         self.textAtBottom.defaultTextAttributes = memeTextAttributes
         self.textAtBottom.text = StringConstants.Default.TextAtBottom
         self.textAtBottom.backgroundColor = UIColor.clearColor()
-        
+        prepareView()
+        self.subscribeForFontNotification()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -69,6 +75,19 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         self.presentViewController(controller, animated: true, completion: nil)
     }
     
+    @IBAction func saveMeme(sender: AnyObject) {
+        let activityController = UIActivityViewController(activityItems: [generateMemedImage()], applicationActivities: nil);
+        self.presentViewController(activityController, animated: true, completion: { () -> Void in
+            print("Meme Saved")
+        })
+    }
+    
+    @IBAction func cancel(sender: AnyObject) {
+        prepareView()
+        self.selectedImage.image = nil
+    }
+    
+    
     // MARK: - UIImagePickerControllerDelegate Methods
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         dismissViewControllerAnimated(true, completion: nil)
@@ -79,18 +98,9 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
             self.selectedImage.image = image
         }
         
+        enableControls()
         dismissViewControllerAnimated(true, completion: nil)
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
     // MARK: - Keyboard Notification Callbacks
     func keyBoardWillShow(notification: NSNotification) {
@@ -136,6 +146,10 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MemeEditorViewController.keyBoardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
     }
     
+    func subscribeForFontNotification() {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MemeEditorViewController.fontUpdated(_:)), name: StringConstants.NotificationName.FontDidChangeNotification, object: nil)
+    }
+    
     func unsubscribeForKeyboardNotification(){
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
@@ -151,5 +165,71 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         let userInfo = notification.userInfo
         let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
         return keyboardSize.CGRectValue()
+    }
+    
+    func fontUpdated(notification:NSNotification){
+        let userInfo = notification.userInfo
+        let font = userInfo![StringConstants.DictionaryKeys.FontName] as! String
+        print("New font is \(font)")
+        memeTextAttributes[NSFontAttributeName] = UIFont(name: font, size: CGFloat(StringConstants.Default.FontSize))
+        textAtBottom.defaultTextAttributes = memeTextAttributes
+        textAtTop.defaultTextAttributes = memeTextAttributes
+        textAtTop.textAlignment = .Center
+        textAtBottom.textAlignment = .Center
+    }
+    
+    func prepareView() {
+        self.editorToolBar.hidden = true
+        self.textAtTop.hidden = true
+        self.textAtBottom.hidden = true
+    }
+    
+    func enableControls() {
+        self.editorToolBar.hidden = false
+        self.textAtTop.hidden = false
+        self.textAtBottom.hidden = false
+    }
+    
+    func generateMemedImage() -> UIImage {
+        editorToolBar.hidden = true
+        pickerToolBar.hidden = true
+        relayoutAsPerTemplate()
+        UIGraphicsBeginImageContext(self.view.frame.size)
+        view.drawViewHierarchyInRect(self.view.frame, afterScreenUpdates: true)
+        let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        editorToolBar.hidden = false
+        pickerToolBar.hidden = false
+        let meme = Meme(titleAtTop: self.textAtTop.text!, titleAtBottom: self.textAtBottom.text!, imageToBeMemed: self.selectedImage.image!, memedImage: memedImage)
+        self.textAtTop.text = StringConstants.Default.TextAtTop
+        self.textAtBottom.text = StringConstants.Default.TextAtBottom
+        (UIApplication.sharedApplication().delegate as! AppDelegate).memes.append(meme)
+        NSNotificationCenter.defaultCenter().postNotificationName(StringConstants.NotificationName.MemeCreatedNotification, object: nil)
+        return memedImage
+    }
+    
+    func getTextFieldParameter(fontName:String) -> [String : AnyObject]{
+        let memeTextAttributes = [NSStrokeColorAttributeName : UIColor.blackColor(), NSForegroundColorAttributeName : UIColor.whiteColor(), NSFontAttributeName : UIFont(name: fontName, size: CGFloat(StringConstants.Default.FontSize))!, NSStrokeWidthAttributeName : -3.0]
+        return memeTextAttributes
+    }
+    
+    func relayoutAsPerTemplate() {
+        let userDefault = NSUserDefaults.standardUserDefaults()
+        let templateType = userDefault.integerForKey(StringConstants.DictionaryKeys.TemplateType)
+        
+        let template = TemplateSetting(rawValue: templateType)!
+        
+        switch template {
+        case .LeftBottom:
+            print("Left bottom is selected")
+            textAtTop.transform = CGAffineTransformMakeRotation(CGFloat(M_PI/2))
+            let imageFrame = self.selectedImage.frame
+            let imageCoords = imageFrame.origin
+            textAtTop.frame.origin = imageCoords
+            
+        default:
+            print("Left bottom is not selected")
+        }
+        
     }
 }
