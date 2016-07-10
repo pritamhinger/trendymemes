@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct StringConstants {
     struct CellIdentifiers {
@@ -28,6 +29,13 @@ struct StringConstants {
         static let StrokeColor = "StrokeColor"
         static let ForegroundColor = "ForeGroundColor"
         static let TemplateType = "TemplateType"
+    }
+    
+    struct  Default {
+        static let FontName = "MarkerFelt-Wide"
+        static let FontSize = 40
+        static let StrokeColor = UIColor.blackColor()
+        static let ForegroungColor = UIColor.whiteColor()
     }
     
 }

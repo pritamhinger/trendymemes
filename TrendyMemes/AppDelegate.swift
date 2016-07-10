@@ -49,21 +49,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - Private Methods
     func initializeMemeEditorSettings(){
         let userDefaults = NSUserDefaults.standardUserDefaults()
-        var fontName = ""
-        var fontSize = 40
+        var fontName = StringConstants.Default.FontName
+        var fontSize = StringConstants.Default.FontSize
         
         if let name = userDefaults.valueForKey(StringConstants.DictionaryKeys.FontName){
             fontName = name as! String
         }
         else{
-            fontName = "MarkerFelt-Wide"
+            fontName = StringConstants.Default.FontName
         }
         
         if let size = userDefaults.valueForKey(StringConstants.DictionaryKeys.FontSize){
             fontSize = size as! Int
         }
         else{
-            fontSize = 40
+            fontSize = StringConstants.Default.FontSize
         }
         
         userDefaults.setObject(fontName, forKey: StringConstants.DictionaryKeys.FontName)

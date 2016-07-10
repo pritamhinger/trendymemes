@@ -50,11 +50,10 @@ class TemplateTypesTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        //tableView.deselectRowAtIndexPath(curSeletedIndex, animated: true)
         let cell = tableView.cellForRowAtIndexPath(indexPath)
         cell?.selected = true
         cell?.accessoryType = .Checkmark
-        //changeTemplate(indexPath.row)
+        changeTemplate(indexPath.row)
     }
     
     override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {

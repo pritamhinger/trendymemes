@@ -12,34 +12,72 @@ class FontsTableViewController: UITableViewController {
     
     var fonts = [String: [String]]()
     var familyNames = [String]()
+    
+    var curSelectedFont = StringConstants.Default.FontName
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         fonts = FontsManager.sharedInstance.fonts
         familyNames = Array(fonts.keys)
+        
+        let userDefault = NSUserDefaults.standardUserDefaults()
+        if let fontName = userDefault.valueForKey(StringConstants.DictionaryKeys.FontName){
+            curSelectedFont = fontName as! String
+            print(curSelectedFont)
+        }
+        else{
+            curSelectedFont = StringConstants.Default.FontName
+        }
     }
 
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        return familyNames.count
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return fonts.count
+        return (fonts[familyNames[section]])!.count
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(StringConstants.CellIdentifiers.FontFamilyNameCellIdentifier, forIndexPath: indexPath)
         
-        cell.textLabel?.text = familyNames[indexPath.row]
-
+        let fontName = (fonts[familyNames[indexPath.section]])![indexPath.row]
+        cell.textLabel?.text = fontName
+        
+        if fontName == curSelectedFont{
+            cell.selected = true
+            cell.accessoryType = .Checkmark
+            tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: .Middle)
+        }
+        
         return cell
     }
  
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return familyNames[section];
+    }
+    
+    override func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        return ""
+    }
 
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let cell = tableView.cellForRowAtIndexPath(indexPath)
+        cell?.selected = true
+        cell?.accessoryType = .Checkmark
+        changeFontName((cell?.textLabel?.text)!)
+    }
+    
+    override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+        let cell = tableView.cellForRowAtIndexPath(indexPath)
+        cell?.selected = false
+        cell?.accessoryType = .None
+    }
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -75,7 +113,7 @@ class FontsTableViewController: UITableViewController {
     }
     */
 
-    
+    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -87,6 +125,12 @@ class FontsTableViewController: UITableViewController {
             destinationController.fonts = fonts[currentFontFamily!]!
         }
     }
- 
-
+    */
+    
+    // MARK: - Private Methods
+    func changeFontName(fontName:String) {
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        userDefaults.setObject(fontName, forKey: StringConstants.DictionaryKeys.FontName)
+    }
+    
 }

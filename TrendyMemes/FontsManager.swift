@@ -25,7 +25,5 @@ class FontsManager {
             
             fonts[fontFamily] = fontsArray
         }
-        
-        print("Captured All fonts")
     }
 }
