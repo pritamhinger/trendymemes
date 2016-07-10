@@ -24,6 +24,9 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     var keyboardShifted = false
     private var textFieldInAction:UITextField?
     
+    var centerOfTopText = CGPoint(x: 0, y: 0)
+    var centerOfBottomText = CGPoint(x: 0, y: 0);
+    
     // MARK: - VC Life Cycle Events
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,12 +41,14 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         self.textAtTop.backgroundColor = UIColor.clearColor()
         
         self.textAtBottom.delegate = self
-        self.textAtBottom.textAlignment = .Center
         self.textAtBottom.defaultTextAttributes = memeTextAttributes
+        self.textAtBottom.textAlignment = .Center
         self.textAtBottom.text = StringConstants.Default.TextAtBottom
         self.textAtBottom.backgroundColor = UIColor.clearColor()
         prepareView()
         self.subscribeForFontNotification()
+        centerOfTopText = textAtTop.center
+        centerOfBottomText = textAtBottom.center
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -76,10 +81,27 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     @IBAction func saveMeme(sender: AnyObject) {
-        let activityController = UIActivityViewController(activityItems: [generateMemedImage()], applicationActivities: nil);
-        self.presentViewController(activityController, animated: true, completion: { () -> Void in
-            print("Meme Saved")
-        })
+        let activityController = UIActivityViewController(activityItems: [generateMemedImage()], applicationActivities: nil)
+        activityController.excludedActivityTypes = [UIActivityTypeAirDrop,
+                                                    UIActivityTypeAddToReadingList,
+                                                    UIActivityTypeAssignToContact,
+                                                    UIActivityTypePrint,
+                                                    UIActivityTypeCopyToPasteboard]
+        
+        activityController.completionWithItemsHandler = {(activityType:String?, completed:Bool, returnedItems: [AnyObject]?, activityError:  NSError?) -> Void in
+            if !completed {
+                
+            }
+            else{
+                self.textAtTop.text = StringConstants.Default.TextAtTop
+                self.textAtBottom.text = StringConstants.Default.TextAtBottom
+                NSNotificationCenter.defaultCenter().postNotificationName(StringConstants.NotificationName.MemeCreatedNotification, object: nil)
+            }
+            
+            self.resetLayout()
+        }
+        
+        self.presentViewController(activityController, animated: true, completion: nil)
     }
     
     @IBAction func cancel(sender: AnyObject) {
@@ -201,10 +223,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         editorToolBar.hidden = false
         pickerToolBar.hidden = false
         let meme = Meme(titleAtTop: self.textAtTop.text!, titleAtBottom: self.textAtBottom.text!, imageToBeMemed: self.selectedImage.image!, memedImage: memedImage)
-        self.textAtTop.text = StringConstants.Default.TextAtTop
-        self.textAtBottom.text = StringConstants.Default.TextAtBottom
         (UIApplication.sharedApplication().delegate as! AppDelegate).memes.append(meme)
-        NSNotificationCenter.defaultCenter().postNotificationName(StringConstants.NotificationName.MemeCreatedNotification, object: nil)
         return memedImage
     }
     
@@ -218,18 +237,38 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         let templateType = userDefault.integerForKey(StringConstants.DictionaryKeys.TemplateType)
         
         let template = TemplateSetting(rawValue: templateType)!
+        let imageFrame = self.selectedImage.frame
         
         switch template {
         case .LeftBottom:
-            print("Left bottom is selected")
+            textAtTop.transform = CGAffineTransformMakeRotation(CGFloat(-1 * M_PI/2))
+            textAtTop.center = CGPoint(x: imageFrame.origin.x + CGFloat(20), y: imageFrame.origin.y + imageFrame.size.height/2)
+        case .BottomRight:
             textAtTop.transform = CGAffineTransformMakeRotation(CGFloat(M_PI/2))
-            let imageFrame = self.selectedImage.frame
-            let imageCoords = imageFrame.origin
-            textAtTop.frame.origin = imageCoords
-            
+            textAtTop.center = CGPoint(x: imageFrame.size.width, y: imageFrame.origin.y + imageFrame.size.height/2)
+        case .LeftRight:
+            textAtTop.transform = CGAffineTransformMakeRotation(CGFloat(-1 * M_PI/2))
+            textAtTop.center = CGPoint(x: imageFrame.origin.x + CGFloat(20), y: imageFrame.origin.y + imageFrame.size.height/2)
+            textAtBottom.transform = CGAffineTransformMakeRotation(CGFloat(M_PI/2))
+            textAtBottom.center = CGPoint(x: imageFrame.size.width, y: imageFrame.origin.y + imageFrame.size.height/2)
+        case .TopLeft:
+            textAtBottom.transform = CGAffineTransformMakeRotation(CGFloat(-1 * M_PI/2))
+            textAtBottom.center = CGPoint(x: imageFrame.origin.x + CGFloat(20), y: imageFrame.origin.y + imageFrame.size.height/2)
+        case .TopRight:
+            textAtBottom.transform = CGAffineTransformMakeRotation(CGFloat(M_PI/2))
+            textAtBottom.center = CGPoint(x: imageFrame.size.width, y: imageFrame.origin.y + imageFrame.size.height/2)
         default:
-            print("Left bottom is not selected")
+            print("Nothing needs to be changed for Top Bottom Template")
         }
         
+    }
+    
+    func resetLayout() {
+        self.textAtTop.transform = CGAffineTransformMakeRotation(CGFloat(0))
+        self.textAtBottom.transform = CGAffineTransformMakeRotation(CGFloat(0))
+        let imageCenter = self.selectedImage.center
+        let imageSize = self.selectedImage.frame.size
+        self.textAtTop.center = CGPoint(x: imageCenter.x, y: imageCenter.y - imageSize.height/2 + CGFloat(23))
+        self.textAtBottom.center = CGPoint(x: imageCenter.x, y: imageCenter.y + imageSize.height/2 - CGFloat(23))
     }
 }
