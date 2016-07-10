@@ -69,12 +69,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         userDefaults.setObject(fontName, forKey: StringConstants.DictionaryKeys.FontName)
         userDefaults.setInteger(fontSize, forKey: StringConstants.DictionaryKeys.FontSize)
         
-        if let templateSetting = userDefaults.valueForKey("Template"){
+        memeEditorSetting.fontSetting = FontSetting(name: fontName, size: fontSize, strokeColor: UIColor.blackColor(), foregroundColor: UIColor.whiteColor())
+        
+        if let templateSetting = userDefaults.valueForKey(StringConstants.DictionaryKeys.TemplateType){
             memeEditorSetting.templateSetting = TemplateSetting(rawValue: templateSetting as! Int)!
         }
         else{
             memeEditorSetting.templateSetting = TemplateSetting.TopBottom
-            userDefaults.setInteger(memeEditorSetting.templateSetting.rawValue, forKey: "Template")
+            userDefaults.setInteger(memeEditorSetting.templateSetting.rawValue, forKey: StringConstants.DictionaryKeys.TemplateType)
         }
     }
 }
