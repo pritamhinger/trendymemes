@@ -21,6 +21,7 @@ class MemesCollectionViewController: UIViewController, UICollectionViewDelegate,
         super.viewDidLoad()
         memes = (UIApplication.sharedApplication().delegate as! AppDelegate).memes
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MemesCollectionViewController.reloadCollectionView(_:)), name: StringConstants.NotificationName.MemeCreatedNotification, object: nil)
+        self.navigationItem.title = "Memes Gallery"
     }
     
     // MARK: - Collection view data source
