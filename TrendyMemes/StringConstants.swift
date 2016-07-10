@@ -13,11 +13,13 @@ struct StringConstants {
         static let MemeImageCellIdentifier = "memeImageCellIdentifier"
         static let TemplateTypeCellIdentifier = "templateTypeCellIdentifier"
         static let FontFamilyNameCellIdentifier = "fontFamilyNameCellIdentifier"
+        static let FontNameCellIdentifier = "fontNameCellIdentifier"
     }
     
     struct Segues {
         static let ShowTemplatesSegue = "showTemplatesSegue"
         static let ShowFontsFamilySegue = "showFontsFamilySegue"
+        static let ShowFontsSegue = "showFontsSegue"
     }
     
     struct DictionaryKeys {

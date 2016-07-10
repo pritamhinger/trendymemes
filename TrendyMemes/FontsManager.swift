@@ -16,14 +16,16 @@ class FontsManager {
     
     private init(){
         let fontFamilyNames = UIFont.familyNames()
-        var fontsArray = [String]()
         for fontFamily in fontFamilyNames {
             let fontsInFamily = UIFont.fontNamesForFamilyName(fontFamily)
+            var fontsArray = [String]()
             for font in fontsInFamily {
                 fontsArray.append(font)
             }
             
             fonts[fontFamily] = fontsArray
         }
+        
+        print("Captured All fonts")
     }
 }
