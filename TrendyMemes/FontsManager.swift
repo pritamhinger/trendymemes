@@ -12,7 +12,7 @@ import UIKit
 class FontsManager {
     static let sharedInstance = FontsManager()
     
-    private var fonts = [String:[String]]()
+    var fonts = [String:[String]]()
     
     private init(){
         let fontFamilyNames = UIFont.familyNames()

@@ -23,6 +23,7 @@
 		485DA9481D300A1500AB9DDE /* TemplateSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485DA9471D300A1500AB9DDE /* TemplateSetting.swift */; };
 		48CEF8301D30CAC400832A58 /* TemplateTypesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CEF82F1D30CAC400832A58 /* TemplateTypesTableViewController.swift */; };
 		48FF50531D31E783000A5A15 /* FontsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FF50521D31E783000A5A15 /* FontsManager.swift */; };
+		48FF50551D31F1A8000A5A15 /* FontsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FF50541D31F1A8000A5A15 /* FontsTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		485DA9471D300A1500AB9DDE /* TemplateSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemplateSetting.swift; sourceTree = "<group>"; };
 		48CEF82F1D30CAC400832A58 /* TemplateTypesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemplateTypesTableViewController.swift; sourceTree = "<group>"; };
 		48FF50521D31E783000A5A15 /* FontsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontsManager.swift; sourceTree = "<group>"; };
+		48FF50541D31F1A8000A5A15 /* FontsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontsTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +154,7 @@
 				48035B671D2EC710007A56FC /* MemesCollectionViewController.swift */,
 				485DA9401D2F7DDD00AB9DDE /* MemeEditorViewController.swift */,
 				48CEF82F1D30CAC400832A58 /* TemplateTypesTableViewController.swift */,
+				48FF50541D31F1A8000A5A15 /* FontsTableViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -341,6 +344,7 @@
 				485DA93F1D2F6EAF00AB9DDE /* StringConstants.swift in Sources */,
 				485DA93D1D2F6D3400AB9DDE /* MemeThumbnailCollectionViewCell.swift in Sources */,
 				485DA9481D300A1500AB9DDE /* TemplateSetting.swift in Sources */,
+				48FF50551D31F1A8000A5A15 /* FontsTableViewController.swift in Sources */,
 				485DA9411D2F7DDD00AB9DDE /* MemeEditorViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
