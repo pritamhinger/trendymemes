@@ -23,6 +23,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     var memeTextAttributes = [String: AnyObject]()
     var keyboardShifted = false
     private var textFieldInAction:UITextField?
+    var memedImage:UIImage = UIImage()
     
     // MARK: - VC Life Cycle Events
     override func viewDidLoad() {
@@ -31,17 +32,9 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         let font = userDefaults.valueForKey(StringConstants.DictionaryKeys.FontName) as! String
         memeTextAttributes = getTextFieldParameter(font)
         
-        self.textAtTop.delegate = self
-        self.textAtTop.text = StringConstants.Default.TextAtTop
-        self.textAtTop.defaultTextAttributes = memeTextAttributes
-        self.textAtTop.textAlignment = .Center
-        self.textAtTop.backgroundColor = UIColor.clearColor()
+        self.setUp(textAtTop, withText: StringConstants.Default.TextAtTop, textAttributes: memeTextAttributes)
+        self.setUp(textAtBottom, withText: StringConstants.Default.TextAtBottom, textAttributes: memeTextAttributes)
         
-        self.textAtBottom.delegate = self
-        self.textAtBottom.defaultTextAttributes = memeTextAttributes
-        self.textAtBottom.textAlignment = .Center
-        self.textAtBottom.text = StringConstants.Default.TextAtBottom
-        self.textAtBottom.backgroundColor = UIColor.clearColor()
         self.navigationItem.title = "Meme Editor"
         prepareView()
         
@@ -64,17 +57,12 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     // MARK: - IBActions
     @IBAction func pickAnImageFromPhotos(sender: AnyObject) {
-        let controller = UIImagePickerController()
-        controller.delegate = self
-        self.presentViewController(controller, animated: true, completion: nil)
+        self.showImagePickerController(.PhotoLibrary)
     }
     
     
     @IBAction func clickANewImage(sender: AnyObject) {
-        let controller = UIImagePickerController()
-        controller.delegate = self
-        controller.sourceType = UIImagePickerControllerSourceType.Camera
-        self.presentViewController(controller, animated: true, completion: nil)
+        self.showImagePickerController(.Camera)
     }
     
     @IBAction func saveMeme(sender: AnyObject) {
@@ -107,6 +95,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
                 
             }
             else{
+                let meme = Meme(topTitle: self.textAtTop.text!, bottomTitle: self.textAtBottom.text!, originalImage: self.selectedImage.image!, memedImage: self.memedImage, createdDateTime: NSDate())
+                (UIApplication.sharedApplication().delegate as! AppDelegate).memes.append(meme)
                 self.textAtTop.text = StringConstants.Default.TextAtTop
                 self.textAtBottom.text = StringConstants.Default.TextAtBottom
                 NSNotificationCenter.defaultCenter().postNotificationName(StringConstants.NotificationName.MemeCreatedNotification, object: nil)
@@ -236,8 +226,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         UIGraphicsEndImageContext()
         editorToolBar.hidden = false
         pickerToolBar.hidden = false
-        let meme = Meme(titleAtTop: self.textAtTop.text!, titleAtBottom: self.textAtBottom.text!, imageToBeMemed: self.selectedImage.image!, memedImage: memedImage)
-        (UIApplication.sharedApplication().delegate as! AppDelegate).memes.append(meme)
+        self.memedImage = memedImage
         return memedImage
     }
     
@@ -284,5 +273,21 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         let imageSize = self.selectedImage.frame.size
         self.textAtTop.center = CGPoint(x: imageCenter.x, y: imageCenter.y - imageSize.height/2 + CGFloat(23))
         self.textAtBottom.center = CGPoint(x: imageCenter.x, y: imageCenter.y + imageSize.height/2 - CGFloat(23))
+    }
+    
+    func setUp(textField:UITextField, withText text:String, textAttributes attributes: [String: AnyObject]) {
+        textField.delegate = self
+        textField.text = text
+        textField.defaultTextAttributes = attributes
+        textField.textAlignment = .Center
+        textField.backgroundColor = UIColor.clearColor()
+    }
+    
+    func showImagePickerController(sourceType: UIImagePickerControllerSourceType) {
+        let controller = UIImagePickerController()
+        controller.delegate = self
+        controller.sourceType = sourceType
+        print("Defaut source type is :\(controller.sourceType.rawValue)")
+        self.presentViewController(controller, animated: true, completion: nil)
     }
 }

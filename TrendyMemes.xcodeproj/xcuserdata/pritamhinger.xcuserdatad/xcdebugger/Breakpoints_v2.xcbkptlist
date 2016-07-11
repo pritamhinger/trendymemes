@@ -122,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TrendyMemes/MemeEditorViewController.swift"
-            timestampString = "489846913.33446"
+            timestampString = "489893808.424687"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "209"
-            endingLineNumber = "209"
+            startingLineNumber = "199"
+            endingLineNumber = "199"
             landmarkName = "fontUpdated(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -138,28 +138,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TrendyMemes/MemeEditorViewController.swift"
-            timestampString = "489846913.33446"
+            timestampString = "489893808.424687"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "215"
-            endingLineNumber = "215"
+            startingLineNumber = "205"
+            endingLineNumber = "205"
             landmarkName = "fontUpdated(_:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TrendyMemes/MemeEditorViewController.swift"
-            timestampString = "489846913.33446"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "240"
-            endingLineNumber = "240"
-            landmarkName = "generateMemedImage()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

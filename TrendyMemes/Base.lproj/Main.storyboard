@@ -137,7 +137,7 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xL3-3C-KyB">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xL3-3C-KyB">
                                 <rect key="frame" x="20" y="108" width="560" height="448"/>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="top" borderStyle="roundedRect" textAlignment="center" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="4jo-c3-Nnz">

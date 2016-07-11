@@ -9,18 +9,10 @@
 import Foundation
 import UIKit
 
-class Meme {
+struct Meme {
     var topTitle:String
     var bottomTitle:String
     var originalImage:UIImage
     var memedImage:UIImage
     var createdDateTime:NSDate
-    
-    init(titleAtTop:String, titleAtBottom:String, imageToBeMemed:UIImage, memedImage:UIImage){
-        self.topTitle = titleAtTop
-        self.bottomTitle = titleAtBottom
-        self.originalImage = imageToBeMemed
-        self.memedImage = memedImage
-        self.createdDateTime = NSDate()
-    }
 }
