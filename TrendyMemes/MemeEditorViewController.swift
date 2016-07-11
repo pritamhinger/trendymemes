@@ -95,6 +95,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
                 self.textAtTop.text = StringConstants.Default.TextAtTop
                 self.textAtBottom.text = StringConstants.Default.TextAtBottom
                 NSNotificationCenter.defaultCenter().postNotificationName(StringConstants.NotificationName.MemeCreatedNotification, object: nil)
+                self.dismissViewControllerAnimated(true, completion: nil)
             }
             
             self.resetLayout()
@@ -106,6 +107,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     @IBAction func cancel(sender: AnyObject) {
         prepareView()
         selectedImage.image = nil
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     

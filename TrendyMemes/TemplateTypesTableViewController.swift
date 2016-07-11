@@ -56,7 +56,7 @@ class TemplateTypesTableViewController: UITableViewController {
         cell?.selected = true
         cell?.accessoryType = .Checkmark
         changeTemplate(indexPath.row)
-        navigationController?.popViewControllerAnimated(true)
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {

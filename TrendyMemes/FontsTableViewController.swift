@@ -78,7 +78,7 @@ class FontsTableViewController: UITableViewController {
         changeFontName(curSelectedFont)
         
         NSNotificationCenter.defaultCenter().postNotificationName(StringConstants.NotificationName.FontDidChangeNotification, object: nil, userInfo: [StringConstants.DictionaryKeys.FontName:curSelectedFont])
-        navigationController?.popViewControllerAnimated(true)
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
@@ -87,6 +87,9 @@ class FontsTableViewController: UITableViewController {
         cell?.accessoryType = .None
     }
     
+    @IBAction func fontSelected(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
     // MARK: - Private Methods
     func changeFontName(fontName:String) {
         let userDefaults = NSUserDefaults.standardUserDefaults()
