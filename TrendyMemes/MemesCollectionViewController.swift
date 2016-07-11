@@ -38,7 +38,7 @@ class MemesCollectionViewController: UIViewController, UICollectionViewDelegate,
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
-        let cell = self.collectionView.dequeueReusableCellWithReuseIdentifier("memeImageCellIdentifier" , forIndexPath: indexPath) as! MemeThumbnailCollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("memeImageCellIdentifier" , forIndexPath: indexPath) as! MemeThumbnailCollectionViewCell
         let image = UIImage(named: "placeholder")
         if memes[indexPath.row].topTitle != ""{
             cell.imagePlaceHolder.image = memes[indexPath.row].memedImage
@@ -53,11 +53,11 @@ class MemesCollectionViewController: UIViewController, UICollectionViewDelegate,
     // MARK: - Private Methods
     func reloadCollectionView(notification: NSNotification) {
         memes = (UIApplication.sharedApplication().delegate as! AppDelegate).memes
-        self.collectionView.reloadData()
+        collectionView.reloadData()
     }
     
     func showEmptyMessage(message:String) -> Void{
-        let frame:CGRect = CGRect(x: 40, y: 0, width: (self.collectionView.bounds.size.width - 80), height: self.collectionView.bounds.size.height);
+        let frame:CGRect = CGRect(x: 40, y: 0, width: (collectionView.bounds.size.width - 80), height: collectionView.bounds.size.height);
         
         let emptyLabel:UILabel = UILabel(frame: frame);
         
@@ -70,15 +70,15 @@ class MemesCollectionViewController: UIViewController, UICollectionViewDelegate,
         emptyLabel.sizeToFit();
         emptyLabel.translatesAutoresizingMaskIntoConstraints = false;
         
-        let leading = NSLayoutConstraint(item: emptyLabel, attribute: .Leading, relatedBy: .Equal, toItem: self.collectionView, attribute: .Leading, multiplier: 1, constant: 15)
-        let yConstraint = NSLayoutConstraint(item: emptyLabel, attribute: .Trailing, relatedBy: .Equal, toItem: self.collectionView, attribute: .Trailing, multiplier: 1, constant: 15)
-        let centerY = NSLayoutConstraint(item: emptyLabel, attribute: .CenterY, relatedBy: .Equal, toItem: self.collectionView, attribute: .CenterY, multiplier: 1, constant: 0)
-        let centerX = NSLayoutConstraint(item: emptyLabel, attribute: .CenterX, relatedBy: .Equal, toItem: self.collectionView, attribute: .CenterX, multiplier: 1, constant: 0)
-        self.collectionView.backgroundView = emptyLabel;
-        self.collectionView.addConstraint(leading);
-        self.collectionView.addConstraint(yConstraint);
-        self.collectionView.addConstraint(centerY);
-        self.collectionView.addConstraint(centerX);
+        let leading = NSLayoutConstraint(item: emptyLabel, attribute: .Leading, relatedBy: .Equal, toItem: collectionView, attribute: .Leading, multiplier: 1, constant: 15)
+        let yConstraint = NSLayoutConstraint(item: emptyLabel, attribute: .Trailing, relatedBy: .Equal, toItem: collectionView, attribute: .Trailing, multiplier: 1, constant: 15)
+        let centerY = NSLayoutConstraint(item: emptyLabel, attribute: .CenterY, relatedBy: .Equal, toItem: collectionView, attribute: .CenterY, multiplier: 1, constant: 0)
+        let centerX = NSLayoutConstraint(item: emptyLabel, attribute: .CenterX, relatedBy: .Equal, toItem: collectionView, attribute: .CenterX, multiplier: 1, constant: 0)
+        collectionView.backgroundView = emptyLabel;
+        collectionView.addConstraint(leading);
+        collectionView.addConstraint(yConstraint);
+        collectionView.addConstraint(centerY);
+        collectionView.addConstraint(centerX);
     }
 }
 

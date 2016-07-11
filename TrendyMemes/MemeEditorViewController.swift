@@ -21,8 +21,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     // MARK: - Private properties
     var memeTextAttributes = [String: AnyObject]()
-    var keyboardShifted = false
-    private var textFieldInAction:UITextField?
     var memedImage:UIImage = UIImage()
     
     // MARK: - VC Life Cycle Events
@@ -32,18 +30,18 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         let font = userDefaults.valueForKey(StringConstants.DictionaryKeys.FontName) as! String
         memeTextAttributes = getTextFieldParameter(font)
         
-        self.setUp(textAtTop, withText: StringConstants.Default.TextAtTop, textAttributes: memeTextAttributes)
-        self.setUp(textAtBottom, withText: StringConstants.Default.TextAtBottom, textAttributes: memeTextAttributes)
+        setUp(textAtTop, withText: StringConstants.Default.TextAtTop, textAttributes: memeTextAttributes)
+        setUp(textAtBottom, withText: StringConstants.Default.TextAtBottom, textAttributes: memeTextAttributes)
         
-        self.navigationItem.title = "Meme Editor"
+        navigationItem.title = "Meme Editor"
         prepareView()
         
-        self.subscribeForFontNotification()
+        subscribeForFontNotification()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.subscribeForKeyboardNotification()
+        subscribeForKeyboardNotification()
         
         if(!UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)){
             camera.enabled = false
@@ -52,32 +50,32 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        self.unsubscribeForKeyboardNotification()
+        unsubscribeForKeyboardNotification()
     }
     
     // MARK: - IBActions
     @IBAction func pickAnImageFromPhotos(sender: AnyObject) {
-        self.showImagePickerController(.PhotoLibrary)
+        showImagePickerController(.PhotoLibrary)
     }
     
     
     @IBAction func clickANewImage(sender: AnyObject) {
-        self.showImagePickerController(.Camera)
+        showImagePickerController(.Camera)
     }
     
     @IBAction func saveMeme(sender: AnyObject) {
         
-        if self.textAtBottom.text == "" || self.textAtTop.text == ""{
+        if textAtBottom.text == "" || textAtTop.text == ""{
             let alertView = UIAlertController(title: "Nanodegree Assignment", message: "Enter messages to add to image", preferredStyle: .Alert)
             let defaultAction = UIAlertAction(title: "Ok", style: .Default, handler: nil);
             alertView.addAction(defaultAction);
             presentViewController(alertView, animated: true, completion: nil);
             
-            if self.textAtTop.text == ""{
-                self.textAtTop.text = StringConstants.Default.TextAtTop
+            if textAtTop.text == ""{
+                textAtTop.text = StringConstants.Default.TextAtTop
             }
             else{
-                self.textAtBottom.text = StringConstants.Default.TextAtBottom
+                textAtBottom.text = StringConstants.Default.TextAtBottom
             }
             
             return
@@ -91,10 +89,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
                                                     UIActivityTypeCopyToPasteboard]
         
         activityController.completionWithItemsHandler = {(activityType:String?, completed:Bool, returnedItems: [AnyObject]?, activityError:  NSError?) -> Void in
-            if !completed {
-                
-            }
-            else{
+            if completed {
                 let meme = Meme(topTitle: self.textAtTop.text!, bottomTitle: self.textAtBottom.text!, originalImage: self.selectedImage.image!, memedImage: self.memedImage, createdDateTime: NSDate())
                 (UIApplication.sharedApplication().delegate as! AppDelegate).memes.append(meme)
                 self.textAtTop.text = StringConstants.Default.TextAtTop
@@ -105,12 +100,12 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
             self.resetLayout()
         }
         
-        self.presentViewController(activityController, animated: true, completion: nil)
+        presentViewController(activityController, animated: true, completion: nil)
     }
     
     @IBAction func cancel(sender: AnyObject) {
         prepareView()
-        self.selectedImage.image = nil
+        selectedImage.image = nil
     }
     
     
@@ -121,7 +116,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage{
-            self.selectedImage.image = image
+            selectedImage.image = image
         }
         
         enableControls()
@@ -130,28 +125,17 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     // MARK: - Keyboard Notification Callbacks
     func keyBoardWillShow(notification: NSNotification) {
-        let textFieldFrame = textFieldInAction?.frame
-        let keyboardFrame = getKeyboardRect(notification)
-        print(textFieldFrame)
-        print(keyboardFrame)
-        if (textFieldFrame?.origin.y)! + (textFieldFrame?.height)! < keyboardFrame.origin.y {
-            keyboardShifted = false
-        }
-        else{
-            keyboardShifted = true
-            self.view.frame.origin.y -= getKeyboardHeight(notification);
+        if self.textAtBottom.isFirstResponder(){
+            self.view.frame.origin.y = -(getKeyboardHeight(notification));
         }
     }
     
     func keyBoardWillHide(notification: NSNotification){
-        if keyboardShifted{
-            self.view.frame.origin.y += getKeyboardHeight(notification)
-        }
+        self.view.frame.origin.y = 0.0
     }
 
     // MARK: - UITextFieldDelegate Methods
     func textFieldDidBeginEditing(textField: UITextField) {
-        textFieldInAction = textField
         if textField.tag == 1 && textField.text?.uppercaseString == StringConstants.Default.TextAtTop{
             textField.text = ""
         }
@@ -205,15 +189,15 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     func prepareView() {
-        self.editorToolBar.hidden = true
-        self.textAtTop.hidden = true
-        self.textAtBottom.hidden = true
+        editorToolBar.hidden = true
+        textAtTop.hidden = true
+        textAtBottom.hidden = true
     }
     
     func enableControls() {
-        self.editorToolBar.hidden = false
-        self.textAtTop.hidden = false
-        self.textAtBottom.hidden = false
+        editorToolBar.hidden = false
+        textAtTop.hidden = false
+        textAtBottom.hidden = false
     }
     
     func generateMemedImage() -> UIImage {
@@ -240,7 +224,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         let templateType = userDefault.integerForKey(StringConstants.DictionaryKeys.TemplateType)
         
         let template = TemplateSetting(rawValue: templateType)!
-        let imageFrame = self.selectedImage.frame
+        let imageFrame = selectedImage.frame
         
         switch template {
         case .LeftBottom:
@@ -267,12 +251,12 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     func resetLayout() {
-        self.textAtTop.transform = CGAffineTransformMakeRotation(CGFloat(0))
-        self.textAtBottom.transform = CGAffineTransformMakeRotation(CGFloat(0))
-        let imageCenter = self.selectedImage.center
-        let imageSize = self.selectedImage.frame.size
-        self.textAtTop.center = CGPoint(x: imageCenter.x, y: imageCenter.y - imageSize.height/2 + CGFloat(23))
-        self.textAtBottom.center = CGPoint(x: imageCenter.x, y: imageCenter.y + imageSize.height/2 - CGFloat(23))
+        textAtTop.transform = CGAffineTransformMakeRotation(CGFloat(0))
+        textAtBottom.transform = CGAffineTransformMakeRotation(CGFloat(0))
+        let imageCenter = selectedImage.center
+        let imageSize = selectedImage.frame.size
+        textAtTop.center = CGPoint(x: imageCenter.x, y: imageCenter.y - imageSize.height/2 + CGFloat(23))
+        textAtBottom.center = CGPoint(x: imageCenter.x, y: imageCenter.y + imageSize.height/2 - CGFloat(23))
     }
     
     func setUp(textField:UITextField, withText text:String, textAttributes attributes: [String: AnyObject]) {
@@ -288,6 +272,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         controller.delegate = self
         controller.sourceType = sourceType
         print("Defaut source type is :\(controller.sourceType.rawValue)")
-        self.presentViewController(controller, animated: true, completion: nil)
+        presentViewController(controller, animated: true, completion: nil)
     }
 }
