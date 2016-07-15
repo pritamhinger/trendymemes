@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TemplateTypesTableViewController: UITableViewController {
+class TemplateTypesTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     var currentTemplate = TemplateSetting.TopBottom
     //var curSeletedIndex:NSIndexPath = NSIndexPath(forRow: 0, inSection: 0)
@@ -26,15 +26,15 @@ class TemplateTypesTableViewController: UITableViewController {
     
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 6
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(StringConstants.CellIdentifiers.TemplateTypeCellIdentifier, forIndexPath: indexPath) 
         
         let template = TemplateSetting(rawValue: indexPath.row)
@@ -51,15 +51,14 @@ class TemplateTypesTableViewController: UITableViewController {
         return cell
     }
 
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath)
         cell?.selected = true
         cell?.accessoryType = .Checkmark
         changeTemplate(indexPath.row)
-        navigationController?.popViewControllerAnimated(true)
     }
     
-    override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath)
         cell?.selected = false
         cell?.accessoryType = .None
@@ -83,6 +82,9 @@ class TemplateTypesTableViewController: UITableViewController {
         }
     }
     
+    @IBAction func templateSelected(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
     func changeTemplate(templateId:Int) {
         let userDefaults = NSUserDefaults.standardUserDefaults()
         userDefaults.setInteger(templateId, forKey: StringConstants.DictionaryKeys.TemplateType)

@@ -8,13 +8,15 @@
 
 import UIKit
 
-class FontsTableViewController: UITableViewController {
+class FontsTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var fonts = [String: [String]]()
     var familyNames = [String]()
     
     var curSelectedFont = StringConstants.Default.FontName
 
+    @IBOutlet weak var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -35,16 +37,16 @@ class FontsTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return familyNames.count
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return (fonts[familyNames[section]])!.count
     }
 
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(StringConstants.CellIdentifiers.FontFamilyNameCellIdentifier, forIndexPath: indexPath)
         
         let fontName = (fonts[familyNames[indexPath.section]])![indexPath.row]
@@ -62,15 +64,15 @@ class FontsTableViewController: UITableViewController {
         return cell
     }
  
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return familyNames[section];
     }
     
-    override func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+    func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         return ""
     }
 
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath)
         cell?.selected = true
         cell?.accessoryType = .Checkmark
@@ -78,15 +80,17 @@ class FontsTableViewController: UITableViewController {
         changeFontName(curSelectedFont)
         
         NSNotificationCenter.defaultCenter().postNotificationName(StringConstants.NotificationName.FontDidChangeNotification, object: nil, userInfo: [StringConstants.DictionaryKeys.FontName:curSelectedFont])
-        navigationController?.popViewControllerAnimated(true)
     }
     
-    override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath)
         cell?.selected = false
         cell?.accessoryType = .None
     }
     
+    @IBAction func fontSelected(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
     // MARK: - Private Methods
     func changeFontName(fontName:String) {
         let userDefaults = NSUserDefaults.standardUserDefaults()

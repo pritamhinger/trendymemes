@@ -18,6 +18,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet weak var textAtTop: UITextField!
     @IBOutlet weak var textAtBottom: UITextField!
     @IBOutlet weak var saveButton: UIBarButtonItem!
+    @IBOutlet weak var templateChooseButton: UIBarButtonItem!
+    @IBOutlet weak var fontChooseButton: UIBarButtonItem!
     
     // MARK: - Private properties
     var memeTextAttributes = [String: AnyObject]()
@@ -95,6 +97,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
                 self.textAtTop.text = StringConstants.Default.TextAtTop
                 self.textAtBottom.text = StringConstants.Default.TextAtBottom
                 NSNotificationCenter.defaultCenter().postNotificationName(StringConstants.NotificationName.MemeCreatedNotification, object: nil)
+                self.dismissViewControllerAnimated(true, completion: nil)
             }
             
             self.resetLayout()
@@ -104,8 +107,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     @IBAction func cancel(sender: AnyObject) {
-        prepareView()
         selectedImage.image = nil
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     
@@ -189,15 +192,22 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     func prepareView() {
-        editorToolBar.hidden = true
+        //editorToolBar.hidden = true
         textAtTop.hidden = true
         textAtBottom.hidden = true
+        saveButton.enabled = false
+        templateChooseButton.enabled = false
+        fontChooseButton.enabled = false
     }
     
     func enableControls() {
-        editorToolBar.hidden = false
+        //editorToolBar.hidden = false
         textAtTop.hidden = false
         textAtBottom.hidden = false
+        
+        saveButton.enabled = true
+        templateChooseButton.enabled = true
+        fontChooseButton.enabled = true
     }
     
     func generateMemedImage() -> UIImage {
