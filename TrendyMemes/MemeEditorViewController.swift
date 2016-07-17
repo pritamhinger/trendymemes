@@ -25,6 +25,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     var memeTextAttributes = [String: AnyObject]()
     var memedImage:UIImage = UIImage()
     var meme:Meme!
+    var editMode = false
     
     // MARK: - VC Life Cycle Events
     override func viewDidLoad() {
@@ -39,6 +40,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         navigationItem.title = "Meme Editor"
         if (meme) != nil{
             prepareViewWithMeme(meme)
+            editMode = true
         }
         else{
             prepareView()
@@ -104,6 +106,9 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
                 self.textAtTop.text = StringConstants.Default.TextAtTop
                 self.textAtBottom.text = StringConstants.Default.TextAtBottom
                 NSNotificationCenter.defaultCenter().postNotificationName(StringConstants.NotificationName.MemeCreatedNotification, object: nil)
+                if self.editMode {
+                    NSNotificationCenter.defaultCenter().postNotificationName(StringConstants.NotificationName.DismissDetailViewNotification, object: nil)
+                }
                 self.dismissViewControllerAnimated(true, completion: nil)
             }
             

@@ -118,11 +118,11 @@
             </objects>
             <point key="canvasLocation" x="576" y="-1140"/>
         </scene>
-        <!--Item-->
+        <!--List-->
         <scene sceneID="ui5-Lb-Rfk">
             <objects>
                 <navigationController id="xYG-Dm-jOZ" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" image="table" id="kad-JF-hwt"/>
+                    <tabBarItem key="tabBarItem" title="List" image="table" selectedImage="table" id="kad-JF-hwt"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="VM3-bT-qj2">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -209,7 +209,7 @@
         <!--Meme Editor View Controller-->
         <scene sceneID="zlf-Xa-ttf">
             <objects>
-                <viewController storyboardIdentifier="MemeEditorVC" id="Wz2-xG-GYT" customClass="MemeEditorViewController" customModule="TrendyMemes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MemeEditorVC" modalPresentationStyle="overFullScreen" id="Wz2-xG-GYT" customClass="MemeEditorViewController" customModule="TrendyMemes" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gSG-nL-tOt"/>
                         <viewControllerLayoutGuide type="bottom" id="UOi-M5-vg5"/>
@@ -421,7 +421,7 @@
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="TXl-vI-oWs" secondAttribute="trailing" constant="-20" id="5mI-fq-NAo"/>
                             <constraint firstItem="TXl-vI-oWs" firstAttribute="top" secondItem="BOL-jB-J59" secondAttribute="bottom" id="9uX-xz-yYO"/>
@@ -519,11 +519,11 @@
             </objects>
             <point key="canvasLocation" x="3017" y="-1246"/>
         </scene>
-        <!--Item-->
+        <!--Grid-->
         <scene sceneID="qDN-28-pYY">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="moc-li-BIL" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" image="collection" id="zuF-NZ-mdF"/>
+                    <tabBarItem key="tabBarItem" title="Grid" image="collection" selectedImage="collection" id="zuF-NZ-mdF"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="CL9-Be-aAG">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

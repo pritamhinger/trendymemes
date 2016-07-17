@@ -18,14 +18,18 @@ class MemeDetailViewController: UIViewController {
         super.viewDidLoad()
         self.navigationItem.title = "Meme Detail"
         self.memedImage.image = meme.memedImage
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MemeDetailViewController.dismissDetailView(_:)), name: StringConstants.NotificationName.DismissDetailViewNotification, object: nil)
     }
 
     // MARK: - IBActions
-    
     @IBAction func editMeme(sender: AnyObject) {
         let controller = self.storyboard?.instantiateViewControllerWithIdentifier(StringConstants.StoryboardId.MemeEditorVC) as! MemeEditorViewController
         controller.meme = meme
         self.presentViewController(controller, animated: true, completion: nil)
     }
     
+    // MARK: - Private Methods
+    func dismissDetailView(notification: NSNotification) {
+        self.navigationController?.popViewControllerAnimated(false)
+    }
 }

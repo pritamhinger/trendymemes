@@ -46,6 +46,7 @@ struct StringConstants {
     struct  NotificationName {
         static let FontDidChangeNotification = "FontChange"
         static let MemeCreatedNotification = "MemeCreatedNotification"
+        static let DismissDetailViewNotification = "DismissDetailViewNotification"
     }
     
     struct StoryboardId {
