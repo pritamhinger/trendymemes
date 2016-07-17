@@ -15,12 +15,14 @@ struct StringConstants {
         static let TemplateTypeCellIdentifier = "templateTypeCellIdentifier"
         static let FontFamilyNameCellIdentifier = "fontFamilyNameCellIdentifier"
         static let FontNameCellIdentifier = "fontNameCellIdentifier"
+        static let MemeImageTableCellIdentifier = "memeImageTableCellIdentifier"
     }
     
     struct Segues {
         static let ShowTemplatesSegue = "showTemplatesSegue"
         static let ShowFontsFamilySegue = "showFontsFamilySegue"
         static let ShowFontsSegue = "showFontsSegue"
+        static let MemeDetailSegue = "memeDetailSegue"
     }
     
     struct DictionaryKeys {
@@ -43,5 +45,9 @@ struct StringConstants {
     struct  NotificationName {
         static let FontDidChangeNotification = "FontChange"
         static let MemeCreatedNotification = "MemeCreatedNotification"
+    }
+    
+    struct StoryboardId {
+        static let MemeEditorVC = "MemeEditorVC"
     }
 }

@@ -21,6 +21,8 @@
 		485DA9441D3009E800AB9DDE /* MemeEditorSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485DA9431D3009E800AB9DDE /* MemeEditorSetting.swift */; };
 		485DA9461D300A0400AB9DDE /* FontSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485DA9451D300A0400AB9DDE /* FontSetting.swift */; };
 		485DA9481D300A1500AB9DDE /* TemplateSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 485DA9471D300A1500AB9DDE /* TemplateSetting.swift */; };
+		4869FEAA1D3B258F0067020C /* MemesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4869FEA91D3B258F0067020C /* MemesTableViewController.swift */; };
+		4869FEAC1D3B2E9A0067020C /* MemeGalleryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4869FEAB1D3B2E9A0067020C /* MemeGalleryTableViewCell.swift */; };
 		48CEF8301D30CAC400832A58 /* TemplateTypesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CEF82F1D30CAC400832A58 /* TemplateTypesTableViewController.swift */; };
 		48FF50531D31E783000A5A15 /* FontsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FF50521D31E783000A5A15 /* FontsManager.swift */; };
 		48FF50551D31F1A8000A5A15 /* FontsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FF50541D31F1A8000A5A15 /* FontsTableViewController.swift */; };
@@ -64,6 +66,8 @@
 		485DA9431D3009E800AB9DDE /* MemeEditorSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemeEditorSetting.swift; sourceTree = "<group>"; };
 		485DA9451D300A0400AB9DDE /* FontSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontSetting.swift; sourceTree = "<group>"; };
 		485DA9471D300A1500AB9DDE /* TemplateSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemplateSetting.swift; sourceTree = "<group>"; };
+		4869FEA91D3B258F0067020C /* MemesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemesTableViewController.swift; sourceTree = "<group>"; };
+		4869FEAB1D3B2E9A0067020C /* MemeGalleryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemeGalleryTableViewCell.swift; sourceTree = "<group>"; };
 		48CEF82F1D30CAC400832A58 /* TemplateTypesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemplateTypesTableViewController.swift; sourceTree = "<group>"; };
 		48FF50521D31E783000A5A15 /* FontsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontsManager.swift; sourceTree = "<group>"; };
 		48FF50541D31F1A8000A5A15 /* FontsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontsTableViewController.swift; sourceTree = "<group>"; };
@@ -155,6 +159,7 @@
 				485DA9401D2F7DDD00AB9DDE /* MemeEditorViewController.swift */,
 				48CEF82F1D30CAC400832A58 /* TemplateTypesTableViewController.swift */,
 				48FF50541D31F1A8000A5A15 /* FontsTableViewController.swift */,
+				4869FEA91D3B258F0067020C /* MemesTableViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -171,6 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				485DA93C1D2F6D3400AB9DDE /* MemeThumbnailCollectionViewCell.swift */,
+				4869FEAB1D3B2E9A0067020C /* MemeGalleryTableViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -338,7 +344,9 @@
 				485DA9461D300A0400AB9DDE /* FontSetting.swift in Sources */,
 				485DA9441D3009E800AB9DDE /* MemeEditorSetting.swift in Sources */,
 				48CEF8301D30CAC400832A58 /* TemplateTypesTableViewController.swift in Sources */,
+				4869FEAC1D3B2E9A0067020C /* MemeGalleryTableViewCell.swift in Sources */,
 				48035B681D2EC710007A56FC /* MemesCollectionViewController.swift in Sources */,
+				4869FEAA1D3B258F0067020C /* MemesTableViewController.swift in Sources */,
 				48035B661D2EC710007A56FC /* AppDelegate.swift in Sources */,
 				48FF50531D31E783000A5A15 /* FontsManager.swift in Sources */,
 				485DA93F1D2F6EAF00AB9DDE /* StringConstants.swift in Sources */,
