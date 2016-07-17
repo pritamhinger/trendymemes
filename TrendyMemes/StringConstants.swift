@@ -22,7 +22,8 @@ struct StringConstants {
         static let ShowTemplatesSegue = "showTemplatesSegue"
         static let ShowFontsFamilySegue = "showFontsFamilySegue"
         static let ShowFontsSegue = "showFontsSegue"
-        static let MemeDetailSegue = "memeDetailSegue"
+        static let MemeTableDetailSegue = "memeTableDetailSegue"
+        static let MemeCollectionDetailSegue = "memeCollectionDetailSegue"
     }
     
     struct DictionaryKeys {

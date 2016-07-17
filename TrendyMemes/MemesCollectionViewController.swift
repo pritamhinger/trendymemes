@@ -50,6 +50,24 @@ class MemesCollectionViewController: UIViewController, UICollectionViewDelegate,
         return cell
     }
 
+    // MARK: - IBActions
+    
+    @IBAction func createMeme(sender: AnyObject) {
+        let controller = self.storyboard?.instantiateViewControllerWithIdentifier(StringConstants.StoryboardId.MemeEditorVC) as! MemeEditorViewController
+        self.presentViewController(controller, animated: true, completion: nil)
+    }
+    
+    // MARK: - Navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == StringConstants.Segues.MemeCollectionDetailSegue{
+            let cell = sender as! UICollectionViewCell
+            let indexPath = collectionView.indexPathForCell(cell)
+            let selectedMeme = memes[indexPath!.row]
+            let memeDetailVC = segue.destinationViewController as! MemeDetailViewController
+            memeDetailVC.meme = selectedMeme
+        }
+    }
+    
     // MARK: - Private Methods
     func reloadCollectionView(notification: NSNotification) {
         memes = (UIApplication.sharedApplication().delegate as! AppDelegate).memes
