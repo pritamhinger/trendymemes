@@ -125,6 +125,7 @@
 		48035B641D2EC710007A56FC /* TrendyMemes */ = {
 			isa = PBXGroup;
 			children = (
+				4869FEB11D3B98FC0067020C /* Layout */,
 				485DA9421D3009BE00AB9DDE /* HelperClasses */,
 				485DA9381D2ECA9D00AB9DDE /* Common */,
 				485DA9351D2ECA6D00AB9DDE /* Controller */,
@@ -213,6 +214,13 @@
 				4869FEAF1D3B47C50067020C /* MemeHelper.swift */,
 			);
 			name = HelperClasses;
+			sourceTree = "<group>";
+		};
+		4869FEB11D3B98FC0067020C /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Layout;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

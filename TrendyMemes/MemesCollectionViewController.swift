@@ -12,6 +12,7 @@ class MemesCollectionViewController: UIViewController, UICollectionViewDelegate,
 
     // MARK: - IBOutlets
     @IBOutlet var collectionView: UICollectionView!
+    @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     
     // MARK: - Private variables
     private var memes = [Meme]()
@@ -19,9 +20,26 @@ class MemesCollectionViewController: UIViewController, UICollectionViewDelegate,
     // MARK: - Life Cycle Events
     override func viewDidLoad() {
         super.viewDidLoad()
+        let itemSpace = CGFloat(3.0)
+        let dimension = (view.frame.size.width - (2 * itemSpace))/3.0
+        
+        flowLayout.minimumInteritemSpacing = itemSpace
+        flowLayout.minimumLineSpacing = itemSpace
+        flowLayout.itemSize = CGSizeMake(dimension, dimension)
         memes = (UIApplication.sharedApplication().delegate as! AppDelegate).memes
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MemesCollectionViewController.reloadCollectionView(_:)), name: StringConstants.NotificationName.MemeCreatedNotification, object: nil)
         self.navigationItem.title = "Memes Gallery"
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MemesCollectionViewController.screenRotated(_:)), name: UIDeviceOrientationDidChangeNotification, object: nil);
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIDeviceOrientationDidChangeNotification, object: nil)
     }
     
     // MARK: - Collection view data source
@@ -97,6 +115,25 @@ class MemesCollectionViewController: UIViewController, UICollectionViewDelegate,
         collectionView.addConstraint(yConstraint);
         collectionView.addConstraint(centerY);
         collectionView.addConstraint(centerX);
+    }
+    
+    func screenRotated(notification:NSNotification) {
+        let itemSpace = CGFloat(3.0)
+        let dimension = (view.frame.size.width - (2 * itemSpace))/3.0
+        
+        flowLayout.minimumInteritemSpacing = itemSpace
+        flowLayout.minimumLineSpacing = itemSpace
+        flowLayout.itemSize = CGSizeMake(dimension, dimension)
+        
+        if(UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation))
+        {
+            print("landscape")
+        }
+        
+        if(UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation))
+        {
+            print("Portrait")
+        }
     }
 }
 

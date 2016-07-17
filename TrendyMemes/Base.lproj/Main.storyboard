@@ -148,8 +148,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="L00-hF-4QZ">
-                                <rect key="frame" x="20" y="64" width="560" height="487"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="1e3-Vv-OU9">
                                     <size key="itemSize" width="100" height="100"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -164,12 +163,18 @@
                                             <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1AL-wV-0S1">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1AL-wV-0S1">
                                                     <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <constraints>
+                                            <constraint firstItem="1AL-wV-0S1" firstAttribute="top" secondItem="MWi-D3-EYo" secondAttribute="topMargin" constant="-8" id="15d-rS-oG7"/>
+                                            <constraint firstItem="1AL-wV-0S1" firstAttribute="leading" secondItem="MWi-D3-EYo" secondAttribute="leadingMargin" constant="-8" id="OGP-nB-sGb"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="1AL-wV-0S1" secondAttribute="trailing" constant="-8" id="Tbl-sF-PRV"/>
+                                            <constraint firstAttribute="bottomMargin" secondItem="1AL-wV-0S1" secondAttribute="bottom" constant="-8" id="vFf-tN-Hmg"/>
+                                        </constraints>
                                         <connections>
                                             <outlet property="imagePlaceHolder" destination="1AL-wV-0S1" id="Jah-jW-LK2"/>
                                             <segue destination="Ecc-T6-Jlc" kind="show" identifier="memeCollectionDetailSegue" id="0NY-zp-4Si"/>
@@ -184,10 +189,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="L00-hF-4QZ" secondAttribute="trailing" constant="-20" id="03y-Ct-gIR"/>
                             <constraint firstItem="L00-hF-4QZ" firstAttribute="top" secondItem="yfp-ys-rHG" secondAttribute="bottom" id="8LD-Qk-zqK"/>
-                            <constraint firstItem="L00-hF-4QZ" firstAttribute="leading" secondItem="gIQ-Yc-VEZ" secondAttribute="leadingMargin" id="Gqt-BE-GxW"/>
                             <constraint firstItem="Gxt-5P-BPs" firstAttribute="top" secondItem="L00-hF-4QZ" secondAttribute="bottom" id="ZIv-rq-XVR"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="L00-hF-4QZ" secondAttribute="trailing" id="qAZ-n2-8rO"/>
+                            <constraint firstItem="L00-hF-4QZ" firstAttribute="leading" secondItem="gIQ-Yc-VEZ" secondAttribute="leadingMargin" constant="-20" id="q5o-US-YGK"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="jMa-hF-4P4">
@@ -200,6 +205,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="L00-hF-4QZ" id="9CI-4c-JQC"/>
+                        <outlet property="flowLayout" destination="1e3-Vv-OU9" id="tN4-nz-6zf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -344,7 +350,9 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <items>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="on5-aL-2eJ"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="on5-aL-2eJ">
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </barButtonItem>
                                     <barButtonItem systemItem="done" id="W9g-2G-TFA">
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
@@ -562,6 +570,6 @@
         <image name="table" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="0NY-zp-4Si"/>
+        <segue reference="xbe-Xp-WCU"/>
     </inferredMetricsTieBreakers>
 </document>
