@@ -17,10 +17,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var memes = [Meme]()
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        UINavigationBar.appearance().barTintColor = UIColor(red: 255.0/255.0, green: 128.0/255.0, blue: 0.0/255.0, alpha: 1.0)
+        UINavigationBar.appearance().tintColor = UIColor.whiteColor()
+        if let barFont = UIFont(name: "Avenir-Light", size: 18.0) {
+            UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor(), NSFontAttributeName:barFont]
+        }
+        
         initializeMemeEditorSettings()
-//        memes.append(Meme(titleAtTop: "",titleAtBottom: "",imageToBeMemed: UIImage(),memedImage: UIImage()))
-//        memes.append(Meme(titleAtTop: "",titleAtBottom: "",imageToBeMemed: UIImage(),memedImage: UIImage()))
-//        memes.append(Meme(titleAtTop: "",titleAtBottom: "",imageToBeMemed: UIImage(),memedImage: UIImage()))
         return true
     }
 

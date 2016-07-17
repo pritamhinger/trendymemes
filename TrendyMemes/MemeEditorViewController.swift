@@ -24,6 +24,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     // MARK: - Private properties
     var memeTextAttributes = [String: AnyObject]()
     var memedImage:UIImage = UIImage()
+    var meme:Meme!
     
     // MARK: - VC Life Cycle Events
     override func viewDidLoad() {
@@ -36,7 +37,12 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         setUp(textAtBottom, withText: StringConstants.Default.TextAtBottom, textAttributes: memeTextAttributes)
         
         navigationItem.title = "Meme Editor"
-        prepareView()
+        if (meme) != nil{
+            prepareViewWithMeme(meme)
+        }
+        else{
+            prepareView()
+        }
         
         subscribeForFontNotification()
     }
@@ -90,10 +96,11 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
                                                     UIActivityTypePrint,
                                                     UIActivityTypeCopyToPasteboard]
         
+        
         activityController.completionWithItemsHandler = {(activityType:String?, completed:Bool, returnedItems: [AnyObject]?, activityError:  NSError?) -> Void in
             if completed {
-                let meme = Meme(topTitle: self.textAtTop.text!, bottomTitle: self.textAtBottom.text!, originalImage: self.selectedImage.image!, memedImage: self.memedImage, createdDateTime: NSDate())
-                (UIApplication.sharedApplication().delegate as! AppDelegate).memes.append(meme)
+                let newMeme = Meme(topTitle: self.textAtTop.text!, bottomTitle: self.textAtBottom.text!, originalImage: self.selectedImage.image!, memedImage: self.memedImage, createdDateTime: NSDate())
+                (UIApplication.sharedApplication().delegate as! AppDelegate).memes.append(newMeme)
                 self.textAtTop.text = StringConstants.Default.TextAtTop
                 self.textAtBottom.text = StringConstants.Default.TextAtBottom
                 NSNotificationCenter.defaultCenter().postNotificationName(StringConstants.NotificationName.MemeCreatedNotification, object: nil)
@@ -193,17 +200,23 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     func prepareView() {
         //editorToolBar.hidden = true
-        textAtTop.hidden = true
-        textAtBottom.hidden = true
+        //textAtTop.hidden = true
+        //textAtBottom.hidden = true
         saveButton.enabled = false
         templateChooseButton.enabled = false
         fontChooseButton.enabled = false
     }
     
+    func prepareViewWithMeme(meme: Meme) {
+        textAtTop.text = meme.topTitle
+        textAtBottom.text = meme.bottomTitle
+        selectedImage.image = meme.originalImage
+    }
+    
     func enableControls() {
         //editorToolBar.hidden = false
-        textAtTop.hidden = false
-        textAtBottom.hidden = false
+        //textAtTop.hidden = false
+        //textAtBottom.hidden = false
         
         saveButton.enabled = true
         templateChooseButton.enabled = true
@@ -213,6 +226,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     func generateMemedImage() -> UIImage {
         editorToolBar.hidden = true
         pickerToolBar.hidden = true
+        view.backgroundColor = UIColor.whiteColor()
         relayoutAsPerTemplate()
         UIGraphicsBeginImageContext(self.view.frame.size)
         view.drawViewHierarchyInRect(self.view.frame, afterScreenUpdates: true)
@@ -220,6 +234,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         UIGraphicsEndImageContext()
         editorToolBar.hidden = false
         pickerToolBar.hidden = false
+        view.backgroundColor = UIColor.darkGrayColor()
         self.memedImage = memedImage
         return memedImage
     }
@@ -242,7 +257,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
             textAtTop.center = CGPoint(x: imageFrame.origin.x + CGFloat(20), y: imageFrame.origin.y + imageFrame.size.height/2)
         case .BottomRight:
             textAtTop.transform = CGAffineTransformMakeRotation(CGFloat(M_PI/2))
-            textAtTop.center = CGPoint(x: imageFrame.size.width, y: imageFrame.origin.y + imageFrame.size.height/2)
+            textAtTop.center = CGPoint(x: imageFrame.size.width - 30, y: imageFrame.origin.y + imageFrame.size.height/2)
         case .LeftRight:
             textAtTop.transform = CGAffineTransformMakeRotation(CGFloat(-1 * M_PI/2))
             textAtTop.center = CGPoint(x: imageFrame.origin.x + CGFloat(20), y: imageFrame.origin.y + imageFrame.size.height/2)

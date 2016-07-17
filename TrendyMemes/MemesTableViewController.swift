@@ -35,31 +35,33 @@ class MemesTableViewController: UITableViewController {
         let meme = memes[indexPath.row]
         cell.topTitle.text = meme.topTitle
         cell.bottomTitle.text = meme.bottomTitle
-        cell.createdDateTime.text = meme.createdDateTime.description
+        cell.createdDateTime.text = MemeHelper.sharedInstance.getDateStringFromDate(meme.createdDateTime)
         cell.memeImageView.image = meme.memedImage
         return cell
     }
  
 
-    /*
+    
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
     }
-    */
+ 
 
-    /*
+    
     // Override to support editing the table view.
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            // Delete the row from the data source
+            memes.removeAtIndex(indexPath.row)
+            (UIApplication.sharedApplication().delegate as! AppDelegate).memes.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            NSNotificationCenter.defaultCenter().postNotificationName(StringConstants.NotificationName.MemeCreatedNotification, object: nil)
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    */
+ 
 
     /*
     // Override to support rearranging the table view.

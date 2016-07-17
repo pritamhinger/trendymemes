@@ -20,14 +20,12 @@ class MemeDetailViewController: UIViewController {
         self.memedImage.image = meme.memedImage
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // MARK: - IBActions
+    
+    @IBAction func editMeme(sender: AnyObject) {
+        let controller = self.storyboard?.instantiateViewControllerWithIdentifier(StringConstants.StoryboardId.MemeEditorVC) as! MemeEditorViewController
+        controller.meme = meme
+        self.presentViewController(controller, animated: true, completion: nil)
     }
-    */
-
+    
 }

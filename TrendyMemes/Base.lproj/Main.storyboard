@@ -107,6 +107,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="9Dp-TE-Agv">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="P1C-8g-zgA">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="createMeme:" destination="Xhn-Ot-OOz" id="4aU-4R-6Rw"/>
                             </connections>
@@ -191,6 +192,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="jMa-hF-4P4">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="fr3-Ey-auD">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="createMeme:" destination="BYZ-38-t0r" id="drf-TD-afg"/>
                             </connections>
@@ -217,30 +219,35 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ilK-Ha-Q44">
-                                <rect key="frame" x="0.0" y="20" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="jkd-6R-QuR"/>
                                 </constraints>
                                 <items>
                                     <barButtonItem systemItem="action" id="GOj-Jb-1dv">
+                                        <color key="tintColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <action selector="saveMeme:" destination="Wz2-xG-GYT" id="9D0-FM-QTS"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="eBB-XU-LSE"/>
                                     <barButtonItem systemItem="bookmarks" id="aOH-zS-pT6">
+                                        <color key="tintColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <segue destination="XDk-ju-M7o" kind="presentation" identifier="showTemplatesSegue" id="jKD-yC-N8Q"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="XQV-CD-SLk"/>
                                     <barButtonItem systemItem="compose" id="WWh-dT-IM8">
+                                        <color key="tintColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <segue destination="Prt-QE-tvr" kind="presentation" identifier="showFontsFamilySegue" id="DLh-dM-c1s"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="4EJ-db-yKW"/>
                                     <barButtonItem systemItem="cancel" id="oat-bB-fgj">
+                                        <color key="tintColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <action selector="cancel:" destination="Wz2-xG-GYT" id="Lwf-6n-oC6"/>
                                         </connections>
@@ -249,17 +256,20 @@
                             </toolbar>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pSz-qD-yTd">
                                 <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="Pof-xC-tk2"/>
                                 </constraints>
                                 <items>
                                     <barButtonItem title="Pick Album" id="A7q-gm-8eK">
+                                        <color key="tintColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <action selector="pickAnImageFromPhotos:" destination="Wz2-xG-GYT" id="3sM-6G-x6N"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="TzH-wl-bAe"/>
                                     <barButtonItem systemItem="camera" id="Jhx-9A-HdA">
+                                        <color key="tintColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <action selector="clickANewImage:" destination="Wz2-xG-GYT" id="irI-0x-M2g"/>
                                         </connections>
@@ -267,26 +277,26 @@
                                 </items>
                             </toolbar>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xL3-3C-KyB">
-                                <rect key="frame" x="20" y="64" width="560" height="492"/>
+                                <rect key="frame" x="0.0" y="44" width="600" height="512"/>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="top" borderStyle="roundedRect" textAlignment="center" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="4jo-c3-Nnz">
-                                <rect key="frame" x="20" y="72" width="560" height="30"/>
+                                <rect key="frame" x="0.0" y="52" width="600" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="no" spellCheckingType="no"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="bottom" borderStyle="roundedRect" textAlignment="center" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="Ymo-0K-9iv">
-                                <rect key="frame" x="20" y="518" width="560" height="30"/>
+                                <rect key="frame" x="0.0" y="518" width="600" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="no" spellCheckingType="no"/>
                             </textField>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="ilK-Ha-Q44" firstAttribute="top" secondItem="gSG-nL-tOt" secondAttribute="bottom" id="AkI-oX-rgX"/>
                             <constraint firstItem="pSz-qD-yTd" firstAttribute="leading" secondItem="0dJ-FF-qoX" secondAttribute="leadingMargin" constant="-20" id="Bxh-i2-v8G"/>
-                            <constraint firstItem="ilK-Ha-Q44" firstAttribute="top" secondItem="gSG-nL-tOt" secondAttribute="bottom" id="FIk-oH-zIZ"/>
-                            <constraint firstItem="xL3-3C-KyB" firstAttribute="leading" secondItem="0dJ-FF-qoX" secondAttribute="leadingMargin" id="H3D-Zk-7jQ"/>
+                            <constraint firstItem="xL3-3C-KyB" firstAttribute="leading" secondItem="0dJ-FF-qoX" secondAttribute="leadingMargin" constant="-20" id="H3D-Zk-7jQ"/>
                             <constraint firstItem="Ymo-0K-9iv" firstAttribute="leading" secondItem="xL3-3C-KyB" secondAttribute="leading" id="Pg7-HF-muK"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="xL3-3C-KyB" secondAttribute="trailing" id="R8W-GA-Al1"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="xL3-3C-KyB" secondAttribute="trailing" constant="-20" id="R8W-GA-Al1"/>
                             <constraint firstItem="ilK-Ha-Q44" firstAttribute="leading" secondItem="0dJ-FF-qoX" secondAttribute="leadingMargin" constant="-20" id="Zv4-yU-kgo"/>
                             <constraint firstItem="UOi-M5-vg5" firstAttribute="top" secondItem="pSz-qD-yTd" secondAttribute="bottom" id="aSF-UN-GnE"/>
                             <constraint firstItem="xL3-3C-KyB" firstAttribute="top" secondItem="ilK-Ha-Q44" secondAttribute="bottom" id="bk9-q7-Sk5"/>
@@ -300,6 +310,8 @@
                             <constraint firstItem="Ymo-0K-9iv" firstAttribute="trailing" secondItem="xL3-3C-KyB" secondAttribute="trailing" id="xfg-3S-PO2"/>
                         </constraints>
                     </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="camera" destination="Jhx-9A-HdA" id="1ia-7O-WYf"/>
                         <outlet property="editorToolBar" destination="ilK-Ha-Q44" id="mTX-Jg-3dX"/>
@@ -329,19 +341,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sPN-M0-34j">
-                                <rect key="frame" x="0.0" y="20" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="on5-aL-2eJ"/>
                                     <barButtonItem systemItem="done" id="W9g-2G-TFA">
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <action selector="templateSelected:" destination="XDk-ju-M7o" id="gRm-pq-sBT"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
+                                <color key="barTintColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </toolbar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Xpm-J3-Bdc">
-                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <rect key="frame" x="0.0" y="44" width="600" height="556"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="templateTypeCellIdentifier" textLabel="VdJ-eY-N2b" detailTextLabel="tax-bf-het" style="IBUITableViewCellStyleSubtitle" id="GrG-KS-jPO">
@@ -394,7 +408,7 @@
         <!--Meme Detail View Controller-->
         <scene sceneID="pef-e2-chP">
             <objects>
-                <viewController id="Ecc-T6-Jlc" customClass="MemeDetailViewController" customModule="TrendyMemes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="Ecc-T6-Jlc" customClass="MemeDetailViewController" customModule="TrendyMemes" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="BOL-jB-J59"/>
                         <viewControllerLayoutGuide type="bottom" id="7nF-xm-An6"/>
@@ -404,17 +418,27 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TXl-vI-oWs">
-                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="TXl-vI-oWs" secondAttribute="trailing" constant="-20" id="5mI-fq-NAo"/>
                             <constraint firstItem="TXl-vI-oWs" firstAttribute="top" secondItem="BOL-jB-J59" secondAttribute="bottom" id="9uX-xz-yYO"/>
-                            <constraint firstItem="7nF-xm-An6" firstAttribute="top" secondItem="TXl-vI-oWs" secondAttribute="bottom" id="C5J-Ue-hlF"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="TXl-vI-oWs" secondAttribute="trailing" constant="-20" id="D67-YE-l3O"/>
-                            <constraint firstItem="TXl-vI-oWs" firstAttribute="leading" secondItem="IpL-lX-bB8" secondAttribute="leadingMargin" constant="-20" id="omg-17-Sby"/>
+                            <constraint firstItem="TXl-vI-oWs" firstAttribute="leading" secondItem="IpL-lX-bB8" secondAttribute="leadingMargin" constant="-20" id="JRY-Fs-YKA"/>
+                            <constraint firstItem="7nF-xm-An6" firstAttribute="top" secondItem="TXl-vI-oWs" secondAttribute="bottom" id="ekh-PY-ja7"/>
                         </constraints>
                     </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="wVJ-Fj-J0F">
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="l4X-e4-eFE">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="editMeme:" destination="Ecc-T6-Jlc" id="QRV-dF-GqK"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="memedImage" destination="TXl-vI-oWs" id="wKJ-yL-MaW"/>
                     </connections>
@@ -436,7 +460,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="LpJ-uo-asN">
-                                <rect key="frame" x="0.0" y="72" width="600" height="528"/>
+                                <rect key="frame" x="0.0" y="52" width="600" height="548"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="fontFamilyNameCellIdentifier" textLabel="Y5H-cQ-kmH" style="IBUITableViewCellStyleDefault" id="VjK-Za-Ky8">
@@ -463,15 +487,17 @@
                                 </connections>
                             </tableView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B7G-p8-dhy">
-                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="8" width="600" height="44"/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="vK6-ea-UNA"/>
                                     <barButtonItem systemItem="done" id="IGw-Hu-yDU">
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <action selector="fontSelected:" destination="Prt-QE-tvr" id="9uL-ng-RPn"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
+                                <color key="barTintColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -536,6 +562,6 @@
         <image name="table" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="xbe-Xp-WCU"/>
+        <segue reference="0NY-zp-4Si"/>
     </inferredMetricsTieBreakers>
 </document>
