@@ -32,6 +32,8 @@ struct StringConstants {
         static let StrokeColor = "StrokeColor"
         static let ForegroundColor = "ForeGroundColor"
         static let TemplateType = "TemplateType"
+        static let SelectedFilter = "SelectedFilter"
+        static let FilterName = "FilterName"
     }
     
     struct  Default {
@@ -41,16 +43,19 @@ struct StringConstants {
         static let ForegroungColor = UIColor.whiteColor()
         static let TextAtTop = "TOP"
         static let TextAtBottom = "BOTTOM"
+        static let Filter = "None"
     }
     
     struct  NotificationName {
         static let FontDidChangeNotification = "FontChange"
         static let MemeCreatedNotification = "MemeCreatedNotification"
         static let DismissDetailViewNotification = "DismissDetailViewNotification"
-        static let ScreenRotatedNotification = "ScreenRotatedNotification" 
+        static let ScreenRotatedNotification = "ScreenRotatedNotification"
+        static let FilterChangeNotification = "FilterChangeNotification"
     }
     
     struct StoryboardId {
         static let MemeEditorVC = "MemeEditorVC"
+        static let ImageFilterViewController = "ImageFilterViewController"
     }
 }

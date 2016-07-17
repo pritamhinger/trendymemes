@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import CoreImage
 
-class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
+class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UIPopoverPresentationControllerDelegate {
 
     // MARK: - IBOutlets
     @IBOutlet weak var editorToolBar: UIToolbar!
@@ -20,12 +21,14 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var templateChooseButton: UIBarButtonItem!
     @IBOutlet weak var fontChooseButton: UIBarButtonItem!
+    @IBOutlet weak var filterPopOverBarButton: UIBarButtonItem!
     
     // MARK: - Private properties
     var memeTextAttributes = [String: AnyObject]()
     var memedImage:UIImage = UIImage()
     var meme:Meme!
     var editMode = false
+    var originalImage:UIImage = UIImage()
     
     // MARK: - VC Life Cycle Events
     override func viewDidLoad() {
@@ -47,6 +50,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         }
         
         subscribeForFontNotification()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MemeEditorViewController.filterChanged(_:)), name: StringConstants.NotificationName.FilterChangeNotification, object: nil)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -105,6 +109,10 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
                 (UIApplication.sharedApplication().delegate as! AppDelegate).memes.append(newMeme)
                 self.textAtTop.text = StringConstants.Default.TextAtTop
                 self.textAtBottom.text = StringConstants.Default.TextAtBottom
+                
+                let userDefault = NSUserDefaults.standardUserDefaults()
+                userDefault.setValue(StringConstants.Default.Filter, forKey: StringConstants.DictionaryKeys.FilterName)
+                
                 NSNotificationCenter.defaultCenter().postNotificationName(StringConstants.NotificationName.MemeCreatedNotification, object: nil)
                 if self.editMode {
                     NSNotificationCenter.defaultCenter().postNotificationName(StringConstants.NotificationName.DismissDetailViewNotification, object: nil)
@@ -123,6 +131,17 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         dismissViewControllerAnimated(true, completion: nil)
     }
     
+    @IBAction func showFilters(sender: AnyObject) {
+//        let controller = self.storyboard?.instantiateViewControllerWithIdentifier(StringConstants.StoryboardId.ImageFilterViewController) as! ImageFilterViewController
+//        controller.modalPresentationStyle = .Popover
+//        controller.popoverPresentationController?.sourceView = sender as? UIView
+//        controller.popoverPresentationController?.delegate = self
+//        presentViewController(controller, animated: true, completion: nil)
+    }
+    
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.None
+    }
     
     // MARK: - UIImagePickerControllerDelegate Methods
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
@@ -132,6 +151,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage{
             selectedImage.image = image
+            originalImage = image
         }
         
         enableControls()
@@ -165,21 +185,16 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         return true
     }
     
-    // MARK: - Private Methods
-    func subscribeForKeyboardNotification() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MemeEditorViewController.keyBoardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MemeEditorViewController.keyBoardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "filterSegue"{
+            let controller = segue.destinationViewController as! ImageFilterViewController
+            controller.modalPresentationStyle = UIModalPresentationStyle.Popover
+            controller.popoverPresentationController?.delegate = self
+        }
+        
     }
     
-    func subscribeForFontNotification() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MemeEditorViewController.fontUpdated(_:)), name: StringConstants.NotificationName.FontDidChangeNotification, object: nil)
-    }
-    
-    func unsubscribeForKeyboardNotification(){
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
-    }
-    
+    // MARK: - NSNotification Center Callback Handlers
     func getKeyboardHeight(notification: NSNotification) -> CGFloat{
         let userInfo = notification.userInfo
         let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
@@ -203,11 +218,85 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         textAtBottom.textAlignment = .Center
     }
     
+    func filterChanged(notification: NSNotification) {
+        let customPayload = notification.userInfo
+        let selectedFilter = customPayload![StringConstants.DictionaryKeys.SelectedFilter] as! String?
+        if let selectedFilter = selectedFilter{
+            applyFilter(selectedFilter)
+        }
+        
+    }
+    
+    // MARK: - Private Methods
+    func applyFilter(selectedFilter:String) {
+        if let image = selectedImage.image{
+            if let cgImage = image.CGImage{
+                let openGLContext = EAGLContext(API: .OpenGLES2)
+                let context = CIContext(EAGLContext: openGLContext)
+                let coreImage = CIImage(CGImage: cgImage)
+                switch selectedFilter {
+                case "Sepia":
+                    if let output = createAndApplyFilter(coreImage, filterName: "CISepiaTone", filterValue: 1.0, filterImageKey: kCIInputImageKey, filterValueKey: kCIInputIntensityKey, filterOutputKey: kCIOutputImageKey){
+                        let cgImageResult = context.createCGImage(output, fromRect: output.extent)
+                        let filteredImage = UIImage(CGImage: cgImageResult)
+                        selectedImage.image = filteredImage
+                    }
+                case "Exposure":
+                    if let output = createAndApplyFilter(coreImage, filterName: "CIExposureAdjust", filterValue: 1.0, filterImageKey: kCIInputImageKey, filterValueKey: kCIInputEVKey, filterOutputKey: kCIOutputImageKey){
+                        let cgImageResult = context.createCGImage(output, fromRect: output.extent)
+                        let filteredImage = UIImage(CGImage: cgImageResult)
+                        selectedImage.image = filteredImage
+                    }
+                case "All":
+                    if let outputSepia = createAndApplyFilter(coreImage, filterName: "CISepiaTone", filterValue: 1.0, filterImageKey: kCIInputImageKey, filterValueKey: kCIInputIntensityKey, filterOutputKey: kCIOutputImageKey){
+                        if let output = createAndApplyFilter(outputSepia, filterName: "CIExposureAdjust", filterValue: 1.0, filterImageKey: kCIInputImageKey, filterValueKey: kCIInputEVKey, filterOutputKey: kCIOutputImageKey){
+                            let cgImageResult = context.createCGImage(output, fromRect: output.extent)
+                            let filteredImage = UIImage(CGImage: cgImageResult)
+                            selectedImage.image = filteredImage
+                        }
+                    }
+                    print("All selected")
+                default:
+                    selectedImage.image = originalImage
+                    print("None Selected")
+                }
+            }
+            else{
+                print("Error while applying filter")
+                return
+            }
+        }
+    }
+    
+    func createAndApplyFilter(ciImage:CIImage, filterName:String, filterValue: Float, filterImageKey:String, filterValueKey:String, filterOutputKey: String) -> CIImage?{
+        let filter = CIFilter(name: filterName)
+        filter?.setValue(ciImage, forKey: filterImageKey)
+        filter?.setValue(filterValue, forKey: filterValueKey)
+        if let output = filter?.valueForKey(filterOutputKey) as? CIImage{
+            return output
+        }
+        else{
+            return nil
+        }
+    }
+    
+    func subscribeForKeyboardNotification() {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MemeEditorViewController.keyBoardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MemeEditorViewController.keyBoardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    func subscribeForFontNotification() {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MemeEditorViewController.fontUpdated(_:)), name: StringConstants.NotificationName.FontDidChangeNotification, object: nil)
+    }
+    
+    func unsubscribeForKeyboardNotification(){
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
     func prepareView() {
-        //editorToolBar.hidden = true
-        //textAtTop.hidden = true
-        //textAtBottom.hidden = true
         saveButton.enabled = false
+        filterPopOverBarButton.enabled = false
         templateChooseButton.enabled = false
         fontChooseButton.enabled = false
     }
@@ -219,10 +308,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     func enableControls() {
-        //editorToolBar.hidden = false
-        //textAtTop.hidden = false
-        //textAtBottom.hidden = false
-        
+        filterPopOverBarButton.enabled = true
         saveButton.enabled = true
         templateChooseButton.enabled = true
         fontChooseButton.enabled = true
@@ -233,7 +319,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         pickerToolBar.hidden = true
         view.backgroundColor = UIColor.whiteColor()
         relayoutAsPerTemplate()
-        UIGraphicsBeginImageContext(self.view.frame.size)
+        UIGraphicsBeginImageContextWithOptions(self.view.frame.size, false, 1.0)
         view.drawViewHierarchyInRect(self.view.frame, afterScreenUpdates: true)
         let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()

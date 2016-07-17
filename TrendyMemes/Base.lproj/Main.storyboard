@@ -244,6 +244,15 @@
                                             <segue destination="XDk-ju-M7o" kind="presentation" identifier="showTemplatesSegue" id="jKD-yC-N8Q"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="hUW-TA-5WR"/>
+                                    <barButtonItem title="Filters" id="bat-fC-qoL">
+                                        <color key="tintColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <segue destination="z5n-y7-bLc" kind="popoverPresentation" identifier="filterSegue" popoverAnchorBarButtonItem="bat-fC-qoL" id="bkk-rZ-QQM">
+                                                <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                            </segue>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="XQV-CD-SLk"/>
                                     <barButtonItem systemItem="compose" id="WWh-dT-IM8">
                                         <color key="tintColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -321,6 +330,7 @@
                     <connections>
                         <outlet property="camera" destination="Jhx-9A-HdA" id="1ia-7O-WYf"/>
                         <outlet property="editorToolBar" destination="ilK-Ha-Q44" id="mTX-Jg-3dX"/>
+                        <outlet property="filterPopOverBarButton" destination="bat-fC-qoL" id="5Qu-qV-mb1"/>
                         <outlet property="fontChooseButton" destination="WWh-dT-IM8" id="sYB-6H-Qb3"/>
                         <outlet property="pickerToolBar" destination="pSz-qD-yTd" id="UOo-HP-zTe"/>
                         <outlet property="saveButton" destination="GOj-Jb-1dv" id="LG3-bg-iHV"/>
@@ -526,6 +536,53 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vxd-zv-vKK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3017" y="-1246"/>
+        </scene>
+        <!--Image Filter View Controller-->
+        <scene sceneID="j4C-hT-2kF">
+            <objects>
+                <viewController storyboardIdentifier="ImageFilterViewController" modalPresentationStyle="currentContext" id="z5n-y7-bLc" customClass="ImageFilterViewController" customModule="TrendyMemes" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8R4-SF-2hg"/>
+                        <viewControllerLayoutGuide type="bottom" id="TUK-2U-gmz"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="9jZ-Tx-gow">
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="45"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Aua-1S-OAQ">
+                                <rect key="frame" x="18" y="8" width="264" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="264" id="7jt-C8-4vD"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="None"/>
+                                    <segment title="Sepia"/>
+                                    <segment title="Exposure"/>
+                                    <segment title="All"/>
+                                </segments>
+                                <color key="tintColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="filterChanged:" destination="z5n-y7-bLc" eventType="valueChanged" id="fZH-dY-xSC"/>
+                                </connections>
+                            </segmentedControl>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Aua-1S-OAQ" firstAttribute="top" secondItem="8R4-SF-2hg" secondAttribute="bottom" constant="8" id="bDM-8Y-FXp"/>
+                            <constraint firstItem="Aua-1S-OAQ" firstAttribute="centerX" secondItem="9jZ-Tx-gow" secondAttribute="centerX" id="pK5-l0-z8r"/>
+                        </constraints>
+                    </view>
+                    <value key="contentSizeForViewInPopover" type="size" width="300" height="45"/>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="300" height="45"/>
+                    <connections>
+                        <outlet property="filterType" destination="Aua-1S-OAQ" id="zOj-9F-apa"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dEF-o8-gfT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3791" y="-724"/>
         </scene>
         <!--Grid-->
         <scene sceneID="qDN-28-pYY">

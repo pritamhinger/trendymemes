@@ -26,7 +26,6 @@ class FontsTableViewController: UIViewController, UITableViewDelegate, UITableVi
         let userDefault = NSUserDefaults.standardUserDefaults()
         if let fontName = userDefault.valueForKey(StringConstants.DictionaryKeys.FontName){
             curSelectedFont = fontName as! String
-            print(curSelectedFont)
         }
         else{
             curSelectedFont = StringConstants.Default.FontName
