@@ -15,6 +15,12 @@ class MemeHelper {
         
     }
     
+    /**
+     Convert passed date into a formatted String equivalent
+     
+     - Parameter date: Input date which is to be converted to String
+     - Returns: Input date formatted as per predefined date format
+     */
     func getDateStringFromDate(date:NSDate) -> String{
         let dateFormatter = NSDateFormatter();
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss";

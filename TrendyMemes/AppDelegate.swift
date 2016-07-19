@@ -14,19 +14,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     var memeEditorSetting: MemeEditorSetting = MemeEditorSetting()
+    
+    /// This is our collection of **Modal Objects** which is being used as datasource by Collection View and Table View
     var memes = [Meme]()
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
+        // Setting bar tint color and tint color for all navigatoin bars used in app.
         UINavigationBar.appearance().barTintColor = UIColor(red: 255.0/255.0, green: 128.0/255.0, blue: 0.0/255.0, alpha: 1.0)
         UINavigationBar.appearance().tintColor = UIColor.whiteColor()
         
+        // Setting Navigation Bar Title attribute to Custom Font
         if let barFont = UIFont(name: "AvenirNextCondensed-DemiBold", size: 22.0){
             UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor(), NSFontAttributeName:barFont];
         }
         
+        // Setting tint color of UITabbar to override the default blue tint color to make tab bar color in accorance to Navigation Bar
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.Default
         UITabBar.appearance().tintColor = UIColor(red: 255.0/255.0, green: 128.0/255.0, blue: 0.0/255.0, alpha: 1.0)
         
+        // Initializing Meme Editor Settings
         initializeMemeEditorSettings()
         return true
     }
