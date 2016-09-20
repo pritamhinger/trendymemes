@@ -1,10 +1,28 @@
-This repository contain an iOS app written in Swift. 
-This is part of my Nanodegree Assignment. 
-The app is as per the specification given at :
-https://docs.google.com/document/d/1bt-SoB1GgqLebcT2mtE6hglkByzlxrobR5eHFMGPcTg/pub
+# TourDeWorld
 
-Further this app allows to change the position of the text to be placed within the image. 
-Also user can select one of the several available fonts in system.
-The app also stores the memes created within the app and show them in 
-Collection View (the memes images are stored in an array as off now. Can be stored to permanent storage).
+## App Overview
+TrendyMemes is an iOS app which allow user to generate Memes on the run. User can do so by picking an image from Photo Album or can click a new Image from within App.
 
+## Features
+* Ability to choose image for Meme Creation from Photo Album
+* Ability to click a new Image for Meme Creation from within App
+* Saving Memes as Image in Photo Album
+* Ability to choose from Available Templates to add text to image
+* Ability to choose a Font from the pool of available font for attributing Meme Text
+* Ability to apply Core Image Filters like 'Sepia' or 'Exposure' or Both
+* Ability to Edit an already created Meme image
+* Showing already created Memes in a Collection View 
+
+## How to use the code
+
+To checkout and use this repository follow steps as listed below:
+```
+$ git clone https://github.com/pritamhinger/trendymemes.git
+$ cd trendymemes
+```
+
+Double click **TrendyMemes.xcodeproj** or open the project in Xcode
+
+## License
+
+`TrendyMemes` is released under an [MIT License] (https://opensource.org/licenses/MIT). See `License` for details
